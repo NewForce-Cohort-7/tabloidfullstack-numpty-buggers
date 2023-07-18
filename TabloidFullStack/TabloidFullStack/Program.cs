@@ -1,4 +1,9 @@
 using TabloidFullStack.Repositories;
+using TabloidFullStackRepositories;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace TabloidFullStack
 {
@@ -7,12 +12,17 @@ namespace TabloidFullStack
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+          
 
             // Add services to the container.
 
             builder.Services.AddControllers();
             builder.Services.AddTransient<IUserRepository, UserRepository>();
+<<<<<<< HEAD
             builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+=======
+            builder.Services.AddTransient<ITagRepository, TagRepository>();
+>>>>>>> main
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
