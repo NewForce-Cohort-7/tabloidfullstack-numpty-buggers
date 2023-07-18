@@ -4,11 +4,11 @@ import {Tag } from "./Tag"
 
 
 export const TagList = () => {
-  const [tags, setTags] = useState([]);
+  const [tag, setTags] = useState([]);
 
   const getTags = () => {
     getAllTags().then(tag => {
-        console.log("tags", tag)
+
         setTags(tag)
     }); 
   };
@@ -22,8 +22,9 @@ export const TagList = () => {
       <div className="row justify-content-center">
         <div className="cards-column">
             <h2>Tag List</h2>
-          {tags.map((tag) => (
+          {tag.map((tag) => (
             <Tag key={tag.id} tag={tag} />
+            
           ))}
         </div>
       </div>
