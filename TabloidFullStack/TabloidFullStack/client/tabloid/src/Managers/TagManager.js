@@ -1,5 +1,9 @@
 import React from "react";
 
+
+//Tag API Manager CRUD functionality & Search
+
+
 const baseUrl = '/api/tag'; 
 
 
@@ -7,4 +11,15 @@ const baseUrl = '/api/tag';
 export const getAllTags = () => {
   return fetch(baseUrl)  
     .then((response) => response.json())
+};
+
+//add a Tag to the database
+export const addTag = (singleTag) => { 
+  return fetch(baseUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(singleTag),
+  });
 };
