@@ -23,7 +23,7 @@ export const TagList = () => {
       <div className="row justify-content-center">
         <div className="cards-column">
             <h2>Tag List</h2>
-            <Button href="/newtag"variant="contained">Add a Tag</Button>
+            <Button href="tags/newtag"variant="contained">Add a Tag</Button>
 
           {tag.map((tag) => (
             <Tag key={tag.id} tag={tag} />
