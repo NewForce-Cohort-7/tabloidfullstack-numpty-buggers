@@ -1,10 +1,11 @@
 import React from "react";
-
+import {useState} from "react";
 
 //Tag API Manager CRUD functionality & Search
 
 
 const baseUrl = '/api/tag'; 
+
 
 
 //get all of the Tags
@@ -23,3 +24,11 @@ export const addTag = (singleTag) => {
     body: JSON.stringify(singleTag),
   });
 };
+//delete a Tag
+export const deleteTag = (id) => {
+  return fetch(baseUrl + "/" + id, {
+     method: "DELETE",
+  })
+  .then(response => response.json())
+
+      }

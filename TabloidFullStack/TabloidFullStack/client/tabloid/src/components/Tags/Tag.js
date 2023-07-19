@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardBody, CardFooter, Button} from "reactstrap";
 import { Link } from "react-router-dom";
-
+import { deleteTag } from "../../Managers/TagManager";
 
 export const Tag = ({ tag }) => {
 
@@ -9,24 +9,23 @@ export const Tag = ({ tag }) => {
       <Card className="m-4">
 
         <CardBody>
-          <p>
+
             
               <strong>{tag.name}</strong>
             
         <CardFooter><div><Button
        
-       className="btn btn-primary">
+       className="editButton">
        Edit
    </Button></div>
    
-        <div> <Button
-       
-       className="btn btn-primary">
-       Delete
-   </Button></div>    
+        <div>      
+        <Button variant="outlined" align="center" padding={1} onClick={() => deleteTag(tag.id)} >
+        Delete
+      </Button></div>    
     </CardFooter> 
        
-          </p>
+       
         </CardBody>
       </Card>
   )}

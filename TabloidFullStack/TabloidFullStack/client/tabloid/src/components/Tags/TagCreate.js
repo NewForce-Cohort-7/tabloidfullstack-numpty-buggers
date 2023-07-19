@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { addTag} from "../../Managers/TagManager";
 import { Button } from "reactstrap";
 
+
 export const AddTag = () => {
   const [tag, update] = useState({
    name: "",

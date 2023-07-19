@@ -7,41 +7,41 @@ using TabloidFullStack.Utils;
 
 
 namespace TabloidFullStackRepositories
+{
+    public class TagRepository : BaseRepository, ITagRepository
     {
-        public class TagRepository : BaseRepository, ITagRepository
+        public TagRepository(IConfiguration config) : base(config) { }
+
+        public List<Tag> GetAllTags()
         {
-            public TagRepository(IConfiguration config) : base(config) { }
-
-            public List<Tag> GetAllTags()
+            using (var conn = Connection)
             {
-                using (var conn = Connection)
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
                 {
-                    conn.Open();
-                    using (var cmd = conn.CreateCommand())
+                    cmd.CommandText = @"SELECT Id, Name FROM Tag ORDER BY Name ASC";
+
+
+                    var reader = cmd.ExecuteReader();
+
+                    var tags = new List<Tag>();
+
+                    while (reader.Read())
                     {
-                        cmd.CommandText = @"SELECT Id, Name FROM Tag ORDER BY Name ASC";
-
-
-                        var reader = cmd.ExecuteReader();
-
-                        var tags = new List<Tag>();
-
-                        while (reader.Read())
+                        tags.Add(new Tag()
                         {
-                            tags.Add(new Tag()
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                Name = reader.GetString(reader.GetOrdinal("Name")),
-                            });
-                        }
-
-                        reader.Close();
-
-                        return tags;
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                        });
                     }
+
+                    reader.Close();
+
+                    return tags;
                 }
             }
-        public void Add(Tag tag )
+        }
+        public void Add(Tag tag)
         {
             using (var conn = Connection)
             {
@@ -52,14 +52,26 @@ namespace TabloidFullStackRepositories
                                         OUTPUT INSERTED.ID
                                         VALUES (@Name)";
                     DbUtils.AddParameter(cmd, "@Name", tag.Name);
-         
 
-                   tag.Id = (int)cmd.ExecuteScalar();
+
+                    tag.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Tag WHERE Id = @Id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
     }
 }
-
-
         
