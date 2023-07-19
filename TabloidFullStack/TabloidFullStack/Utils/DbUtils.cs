@@ -119,5 +119,20 @@ namespace TabloidFullStack.Utils
                 cmd.Parameters.AddWithValue(name, value);
             }
         }
+
+        internal static object ValueOrDBNull(string imageLocation)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static object ValueOrDBNull(object publishDateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static string GetNullableString(SqlDataReader reader, string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
