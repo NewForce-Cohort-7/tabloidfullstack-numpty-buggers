@@ -29,6 +29,6 @@ export const deleteTag = (id) => {
   return fetch(baseUrl + "/" + id, {
      method: "DELETE",
   })
-  .then(response => response.json())
+
 
       }

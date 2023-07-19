@@ -1,9 +1,21 @@
 import React from "react";
-import { Card, CardBody, CardFooter, Button} from "reactstrap";
+import { Card, CardBody, CardFooter, Button, pop} from "reactstrap";
 import { Link } from "react-router-dom";
 import { deleteTag } from "../../Managers/TagManager";
+import { useNavigate } from "react-router-dom";
+
 
 export const Tag = ({ tag }) => {
+
+  const navigate = useNavigate()
+
+ 
+  const handleDelete = () => {
+    deleteTag(tag.id)
+        .then(() => {
+            navigate("/")
+        })
+}
 
   return (
       <Card className="m-4">
@@ -20,7 +32,7 @@ export const Tag = ({ tag }) => {
    </Button></div>
    
         <div>      
-        <Button variant="outlined" align="center" padding={1} onClick={() => deleteTag(tag.id)} >
+        <Button className="btn btn-primary" onClick={handleDelete}>
         Delete
       </Button></div>    
     </CardFooter> 
