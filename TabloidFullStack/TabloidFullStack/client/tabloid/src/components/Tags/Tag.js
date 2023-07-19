@@ -13,9 +13,10 @@ export const Tag = ({ tag }) => {
   const handleDelete = () => {
     deleteTag(tag.id)
         .then(() => {
-            navigate("/")
+            navigate("/tags")
         })
 }
+
 
   return (
       <Card className="m-4">
@@ -25,12 +26,10 @@ export const Tag = ({ tag }) => {
             
               <strong>{tag.name}</strong>
             
-        <CardFooter><div><Button
-       
-       className="editButton">
-       Edit
-   </Button></div>
-   
+        <CardFooter>
+          <Button onClick={() => navigate(`/tags/edit/${tag.id}`)}>
+        Edit
+      </Button>     
         <div>      
         <Button className="btn btn-primary" onClick={handleDelete}>
         Delete
