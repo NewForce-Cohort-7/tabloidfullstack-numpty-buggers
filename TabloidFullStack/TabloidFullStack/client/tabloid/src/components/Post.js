@@ -1,8 +1,15 @@
 import React from "react";
 import { Card, CardImg, CardBody, Table } from "reactstrap";
 import { getAllComments } from "../Managers/CommentManager";
+import { useNavigate } from "react-router";
+import { Button } from "bootstrap";
 
 export const Post = ({ post }) => {
+  const navigate = useNavigate();
+
+  const getCommentsForId = (e) => {
+    navigate("/Comment/GetCommentsByPostId?")
+  }
   return (
     <Table striped bordered hover>
       <thead>
@@ -17,7 +24,7 @@ export const Post = ({ post }) => {
           <td>{post.title}</td>
           <td>{`${post.userProfile.firstName} ${post.userProfile.lastName}`}</td>
           <td>{post.category.name}</td>
-          <Button OnClick={getAllComments}/>
+          <Button OnClick={getCommentsForId}>View Comments</Button>
         </tr>
       </tbody>
     </Table>

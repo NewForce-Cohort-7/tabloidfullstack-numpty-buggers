@@ -20,6 +20,7 @@ export default function ApplicationViews() {
         <Route path="/category/add" element={<CategoryForm />} />
         <Route path ="/tags" element ={<TagList />}/>
         <Route path="/tags/newtag" element={<AddTag/>} />
+        <Route path = "/commentsbyId" element={<Comment/>} />
 
       </Routes>
    );

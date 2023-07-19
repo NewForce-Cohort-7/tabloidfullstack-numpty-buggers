@@ -1,6 +1,6 @@
 const apiUrl = "https://localhost:5001";
 
 export const getAllComments = () => {
-    return fetch(`${apiUrl}api/Comment/GetCommentsByPostId?id=1`)
+    return fetch(`${apiUrl}api/Comment/GetCommentsByPostId?`)
     .then((res) => res.json())
 };
