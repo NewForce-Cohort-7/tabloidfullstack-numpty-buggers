@@ -38,6 +38,13 @@ const CategoryList = () => {
             > 
               Delete
             </Button>
+            <Button
+            color="warning"
+            type="edit"
+            onClick={() => navigate(`/category/edit/${category.id}`)}
+            >
+              Edit
+            </Button>
           </div>
         ))}
       </div>
