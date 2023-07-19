@@ -4,19 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { addCategory } from "../Managers/CategoryManager";
 
 export const CategoryForm = () => {
-    const { addCategory } = useState("");
-    const [name, setName] = useState("");
+    const [category, update] = useState({
+        name: "",
+    })
 
     const navigate = useNavigate();
 
-    const submit = (e) => {
-        const category = {
-            name
+    const handleSaveButtonClick = (event) => {
+        event.preventDefault()
+        const categoryToAPI = {
+            Name: category.name,
         };
-
-        addCategory(category).then((p) => {
-            navigate("/");
-        });
+        return addCategory(categoryToAPI)
+        .then(navigate("/category"));
     };
 
     return (
@@ -28,12 +28,22 @@ export const CategoryForm = () => {
                             <FormGroup>
                                 <Label for="name">Category Name</Label>
                                 <Input
-                                    id="name"
-                                    onChange={(e) => setName(e.target.value)}
+                                    required autoFocus
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Enter the name of your category here"
+                                    value={category.name}
+                                    onChange={
+                                        (event) => {
+                                            const copy = {...category}
+                                            copy.name = event.target.value
+                                            update(copy)
+                                        }
+                                    }
                                 />
                             </FormGroup>
                         </Form>
-                        <Button color="info" onClick={submit}>
+                        <Button color="info" onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}>
                             SUBMIT
                         </Button>
                     </CardBody>
