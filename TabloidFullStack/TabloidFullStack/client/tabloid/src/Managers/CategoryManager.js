@@ -8,7 +8,7 @@ export const getAllCategories = () => {
 };
 
 export const addCategory = (singleCategory) => {
-    return fetch (apiUrl, {
+    return fetch ("/api/category", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -16,3 +16,10 @@ export const addCategory = (singleCategory) => {
         body: JSON.stringify(singleCategory),
     });
 };
+
+export const deleteCategory = (id) => {
+    return fetch (`${apiUrl}/api/category/${id}`, {
+        method: "DELETE",
+    })
+    .then(() => getAllCategories())
+}
