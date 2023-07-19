@@ -27,5 +27,12 @@ namespace TabloidFullStack.Controllers
             _categoryRepo.Add(category);
             return CreatedAtAction("Get", new { id = category.Id }, category);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _categoryRepo.Delete(id);
+            return NoContent();
+        }
     }
 }

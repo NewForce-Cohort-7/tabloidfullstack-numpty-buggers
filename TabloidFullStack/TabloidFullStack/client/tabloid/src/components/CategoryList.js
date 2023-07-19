@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getAllCategories } from "../Managers/CategoryManager";
+import React, { useEffect, useState } from "react";
+import { getAllCategories, deleteCategory } from "../Managers/CategoryManager";
 import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -27,6 +27,17 @@ const CategoryList = () => {
             <p>
               <strong>{category.name}</strong>
             </p>
+            <Button
+              color="danger"
+              type="delete"
+              onClick={() => 
+                deleteCategory(category.id).then((categories) => {
+                  setCategories(categories);
+                })
+              }
+            > 
+              Delete
+            </Button>
           </div>
         ))}
       </div>
