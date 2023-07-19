@@ -8,6 +8,7 @@ import { TagList } from "./Tags/TagList"
 import { AddTag } from "./Tags/TagCreate";
 import CategoryForm from "./CategoryForm";
 import { UserPosts } from "./Posts/UserPosts";
+import { PostDetails } from "./Posts/PostDetails";
 
 
 export default function ApplicationViews() {
@@ -16,6 +17,7 @@ export default function ApplicationViews() {
       <Routes>
         <Route path="/" element={<Hello />} />
         <Route path="/posts" element={<PostList />} />
+        <Route path="/posts/:id" element={<PostDetails />} />
         <Route path="/myPosts" element={<UserPosts />} />
         <Route path="/login" element={<Login />} />
         <Route path="/category" element={<CategoryList />} />
