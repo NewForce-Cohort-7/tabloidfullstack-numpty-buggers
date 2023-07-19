@@ -66,7 +66,7 @@ namespace TabloidFullStack.Repositories
             }
         }
 
-        public List<Post> GetUsersPosts(int userProfileId)
+        public List<Post> GetPostsByUserId(int userProfileId)
         {
             using (var conn = Connection)
             {

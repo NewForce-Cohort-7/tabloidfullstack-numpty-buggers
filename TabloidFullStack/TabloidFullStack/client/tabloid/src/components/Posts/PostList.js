@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllPosts } from "../Managers/PostManager";
+import { getAllPosts } from "../../Managers/PostManager";
 import { Post } from "./Post";
 
 
