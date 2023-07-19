@@ -19,8 +19,10 @@ namespace TabloidFullStack.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT p.Id AS PId, p.Title, p.Content, p.ImageLocation AS PImage, p.CreateDateTime AS PCreateDate, p.PublishDateTime, p.IsApproved, p.CategoryId, p.UserProfileId, up.Id AS UId, up.DisplayName, up.FirstName, up.LastName, up.Email, up.CreateDateTime AS UPCreateDate, up.ImageLocation AS UPImage, up.UserTypeId FROM Post p
-                        LEFT JOIN UserProfile up ON up.Id = p.UserProfileId              
+
+                        SELECT p.Id AS PId, p.Title, p.Content, p.ImageLocation AS PImage, p.CreateDateTime AS PCreateDate, p.PublishDateTime, p.IsApproved, p.CategoryId, p.UserProfileId, up.Id AS UId, up.DisplayName, up.FirstName, up.LastName, up.Email, up.CreateDateTime AS UPCreateDate, up.ImageLocation AS UPImage, up.UserTypeId, c.Id AS CId, c.[Name] FROM Post p                        
+                        LEFT JOIN UserProfile up ON up.Id = p.UserProfileId  
+                        LEFT JOIN Category c ON p.CategoryId = c.Id
                         ORDER BY p.CreateDateTime";
 
                     var reader = cmd.ExecuteReader();
@@ -49,6 +51,11 @@ namespace TabloidFullStack.Repositories
                                 UserTypeId = DbUtils.GetInt(reader, "UserTypeId")
 
                             },
+                            Category = new Category()
+                            {
+                                Id = DbUtils.GetInt(reader, "CId"),
+                                Name = DbUtils.GetString(reader, "Name")
+                            }
                         });
                     }
 

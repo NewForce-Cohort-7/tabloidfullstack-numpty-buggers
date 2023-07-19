@@ -15,7 +15,7 @@ export const Post = ({ post }) => {
         <tr>
           <td>{post.title}</td>
           <td>{`${post.userProfile.firstName} ${post.userProfile.lastName}`}</td>
-          <td>"post.category.name"</td>
+          <td>{post.category.name}</td>
         </tr>
       </tbody>
     </Table>

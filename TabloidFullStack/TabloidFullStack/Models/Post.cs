@@ -31,5 +31,7 @@ namespace TabloidFullStack.Models
         public int UserProfileId { get; set; }
 
         public UserProfile UserProfile { get; set; }
+
+        public Category Category { get; set; }
     }
 }
