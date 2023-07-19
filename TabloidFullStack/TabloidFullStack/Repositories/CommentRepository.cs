@@ -1,4 +1,5 @@
-﻿using TabloidFullStack.Models;
+﻿using Microsoft.Data.SqlClient;
+using TabloidFullStack.Models;
 
 namespace TabloidFullStack.Repositories
 {
@@ -51,6 +52,32 @@ namespace TabloidFullStack.Repositories
                     reader.Close();
 
                     return comments;
+                }
+            }
+        }
+        public void AddComment(Comment comment)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                INSERT INTO Comment (PostId, UserProfileId, Subject, Content, CreateDateTime)
+                OUTPUT INSERTED.ID
+                VALUES (@postId, @userProfileId, @subject, @content, @createDateTime);
+            ";
+
+                    cmd.Parameters.AddWithValue("@postId", comment.PostId);
+                    cmd.Parameters.AddWithValue("@userProfileId", comment.UserProfileId);
+                    cmd.Parameters.AddWithValue("@subject", comment.Subject);
+                    cmd.Parameters.AddWithValue("@content", comment.Content);
+                    cmd.Parameters.AddWithValue("@createDateTime", comment.CreateDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                    int newlyCreatedId = (int)cmd.ExecuteScalar();
+
+                    comment.Id = newlyCreatedId;
+
                 }
             }
         }
