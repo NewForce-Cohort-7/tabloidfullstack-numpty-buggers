@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
 using TabloidFullStack.Models;
 using TabloidFullStack.Repositories;
+using TabloidFullStack.Utils;
 
 
 namespace TabloidFullStackRepositories
@@ -40,5 +41,25 @@ namespace TabloidFullStackRepositories
                     }
                 }
             }
+        public void Add(Tag tag )
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO Tag (Name)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@Name)";
+                    DbUtils.AddParameter(cmd, "@Name", tag.Name);
+         
+
+                   tag.Id = (int)cmd.ExecuteScalar();
+                }
+            }
         }
+    }
 }
+
+
+        
