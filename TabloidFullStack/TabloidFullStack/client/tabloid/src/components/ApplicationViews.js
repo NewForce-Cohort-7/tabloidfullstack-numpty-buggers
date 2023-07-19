@@ -8,6 +8,7 @@ import { TagList } from "./Tags/TagList"
 import { AddTag } from "./Tags/TagCreate";
 import CategoryForm from "./CategoryForm";
 import { UserPosts } from "./Posts/UserPosts";
+import { Comment } from "./Comment.js";
 
 
 export default function ApplicationViews() {

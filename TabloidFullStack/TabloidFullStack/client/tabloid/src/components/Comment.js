@@ -1,3 +1,5 @@
+import { Table } from "reactstrap";
+
 export const Comment = ({comment}) => {
     return(
         <Table striped bordered hover>
@@ -11,9 +13,10 @@ export const Comment = ({comment}) => {
         </thead>
         <tbody>
           <tr>
-            <td>{comment.content}</td>
-            <td>{`${post.userProfile.firstName} ${post.userProfile.lastName}`}</td>
-            <td>{post.category.name}</td>
+            <td>{comment.Content}</td>
+            <td>{comment.Subject}</td>
+            <td>{comment.UserProfileId}</td>
+            <td>{comment.CreateDateTime}</td>
           </tr>
         </tbody>
       </Table>  
