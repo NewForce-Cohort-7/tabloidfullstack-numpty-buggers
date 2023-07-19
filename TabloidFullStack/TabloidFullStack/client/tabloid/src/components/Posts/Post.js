@@ -1,16 +1,8 @@
 import React from "react";
-import { Card, CardImg, CardBody, Table } from "reactstrap";
 
+//This function is in charge of the contents of each individual post. It uses the prop "post" to get state from PostList.js or UserPosts.js
 export const Post = ({ post }) => {
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Category</th>
-        </tr>
-      </thead>
       <tbody>
         <tr>
           <td>{post.title}</td>
@@ -18,6 +10,5 @@ export const Post = ({ post }) => {
           <td>{post.category.name}</td>
         </tr>
       </tbody>
-    </Table>
   );
 };
