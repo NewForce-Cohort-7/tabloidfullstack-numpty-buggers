@@ -42,37 +42,24 @@ namespace TabloidFullStack.Repositories
             }
         }
 
-        //public Category GetById(int id)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using(var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                SELECT Id, [Name]
-        //                FROM Category
-        //                WHERE Id = @Id";
+        public void Add(Category category)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    // Note that we are using the "OUTPUT INSERTED.Id" SQL syntax here to return the id of the newly inserted category
+                    cmd.CommandText = @"
+                        INSERT INTO Category ([Name])
+                        OUTPUT INSERTED.ID
+                        VALUES (@Name)";
 
-        //            DbUtils.AddParameter(cmd, "@Id", id);
+                    DbUtils.AddParameter(cmd, "@Name", category.Name);
 
-        //            var reader = cmd.ExecuteReader();
-
-        //            Category category = null;
-        //            if (reader.Read())
-        //            {
-        //                category = new Category()
-        //                {
-        //                    Id = DbUtils.GetInt(reader, "Id"),
-        //                    Name = DbUtils.GetString(reader, "Name")
-        //                };
-        //            }
-
-        //            reader.Close();
-
-        //            return category;
-        //        }
-        //    }
-        //}
+                    category.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
     }
 }

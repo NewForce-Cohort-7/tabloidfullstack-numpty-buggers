@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getAllCategories } from "../Managers/CategoryManager";
+import { Button } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
 const CategoryList = () => {
     const [categories, setCategories] = useState([]);
@@ -8,20 +10,31 @@ const CategoryList = () => {
         getAllCategories().then(allCategories => setCategories(allCategories));
     };
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         getCategories();
     }, []);
 
+    const create = (e) => {
+      navigate("/category/add")
+    }
+
     return (  
-        <div>
-          {categories.map((category) => (
-            <div key={category.id}>
-              <p>
-                <strong>{category.name}</strong>
-              </p>
-            </div>
-          ))}
-        </div>
+        <><div>
+        {categories.map((category) => (
+          <div key={category.id}>
+            <p>
+              <strong>{category.name}</strong>
+            </p>
+          </div>
+        ))}
+      </div>
+      <div>
+          <Button color="info" onClick={create}>
+            Create Category
+          </Button>
+        </div></>
       );
     };
     
