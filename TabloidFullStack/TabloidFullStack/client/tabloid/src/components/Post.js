@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardImg, CardBody, Table } from "reactstrap";
+import { getAllComments } from "../Managers/CommentManager";
 
 export const Post = ({ post }) => {
   return (
@@ -16,6 +17,7 @@ export const Post = ({ post }) => {
           <td>{post.title}</td>
           <td>{`${post.userProfile.firstName} ${post.userProfile.lastName}`}</td>
           <td>{post.category.name}</td>
+          <Button OnClick={getAllComments}/>
         </tr>
       </tbody>
     </Table>
