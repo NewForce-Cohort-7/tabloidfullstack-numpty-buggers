@@ -36,5 +36,16 @@ namespace TabloidFullStack.Controllers
             return Ok(posts);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetSinglePost(int id)
+        {
+            var post = _postRepository.GetById(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return Ok(post);
+        }
+
     }
 }

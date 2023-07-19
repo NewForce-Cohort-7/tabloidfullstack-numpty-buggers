@@ -1,6 +1,5 @@
 import React from "react";
-import { Button } from "reactstrap";
-import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 //This function is in charge of the contents of each individual post. It uses the prop "post" to get state from PostList.js or UserPosts.js
 export const Post = ({ post }) => {
@@ -15,7 +14,7 @@ export const Post = ({ post }) => {
           <td>{post.title}</td>
           <td>{`${post.userProfile.firstName} ${post.userProfile.lastName}`}</td>
           <td>{post.category.name}</td>
-          <Button OnClick={getCommentsForId}>View Comments</Button>
+          <td><Link to={`/posts/${post.id}`}>Details</Link></td>
         </tr>
       </tbody>
   );
