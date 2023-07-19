@@ -19,7 +19,7 @@ export const PostList = () => {
         <div className="row justify-content-center">
           <div className="cards-column">
             {posts.map((post) => {
-                // console.log(post.title)
+                console.log(post)
                 return  <Post key={post.id} post={post} />
             })}
           </div>
