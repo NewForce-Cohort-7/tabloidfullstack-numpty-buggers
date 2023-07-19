@@ -19,11 +19,24 @@ namespace TabloidFullStack.Controllers
             _postRepository = postRepository;
         }
 
+        private int GetCurrentUserProfileId()
+        {
+            string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return int.Parse(id);
+        }
 
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(_postRepository.GetAll());
+        }
+
+        [HttpGet]
+        public IActionResult MyPosts()
+        {
+            var currentUserId = GetCurrentUserProfileId();
+            var myPosts = _postRepository.GetUsersPosts(currentUserId);
+            return Ok(myPosts);
         }
 
 
