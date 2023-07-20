@@ -2,17 +2,18 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Hello from "./Hello";
 import { PostList } from "./Posts/PostList";
-import CategoryList from "./CategoryList";
+import CategoryList from "./Categories/CategoryList";
 import Login from "./Login";
 import { TagList } from "./Tags/TagList"
 import { AddTag } from "./Tags/TagCreate";
-import CategoryForm from "./CategoryForm";
+import CategoryForm from "./Categories/CategoryForm";
 import { UserPosts } from "./Posts/UserPosts";
-import { EditCategory } from "./EditCategory";
+import { EditCategory } from "./Categories/EditCategory";
 import { PostDetails } from "./Posts/PostDetails";
 import { EditTag } from "./Tags/TagEdit";
 import { DeleteTag } from "./Tags/TagDelete";
 import { PostForm } from "./Posts/PostForm";
+import { DeleteCategory } from "./Categories/DeleteCategory";
 
 export default function ApplicationViews() {
 
@@ -27,6 +28,7 @@ export default function ApplicationViews() {
         <Route path="/category" element={<CategoryList />} />
         <Route path="/category/add" element={<CategoryForm />} />
         <Route path="/category/edit/:categoryId" element={<EditCategory />} />
+        <Route path="/category/delete/:categoryId" element={<DeleteCategory />} />
         <Route path ="/tags" element ={<TagList />}/>
         <Route path="/tags/newtag" element={<AddTag/>} />
         <Route path="/tags/edit/:tagId" element={<EditTag/>} />

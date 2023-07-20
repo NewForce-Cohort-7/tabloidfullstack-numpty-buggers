@@ -25,7 +25,6 @@ export const deleteCategory = (id) => {
     return fetch (`${apiUrl}/api/category/${id}`, {
         method: "DELETE",
     })
-    .then(() => getAllCategories())
 };
 
 export const editCategory = (category) => {
