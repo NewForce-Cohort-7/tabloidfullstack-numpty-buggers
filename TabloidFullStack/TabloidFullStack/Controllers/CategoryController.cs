@@ -21,6 +21,17 @@ namespace TabloidFullStack.Controllers
             return Ok(_categoryRepo.GetAll());
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var category = _categoryRepo.GetCategoryById(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
+        }
+
         [HttpPost]
         public IActionResult Post(Category category)
         {
@@ -34,5 +45,18 @@ namespace TabloidFullStack.Controllers
             _categoryRepo.Delete(id);
             return NoContent();
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Category category)
+        {
+            if (id != category.Id)
+            {
+                return BadRequest();
+            }
+
+            _categoryRepo.Update(category);
+            return NoContent();
+        }
+
     }
 }
