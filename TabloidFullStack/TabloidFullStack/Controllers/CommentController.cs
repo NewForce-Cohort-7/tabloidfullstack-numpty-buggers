@@ -8,18 +8,19 @@ namespace TabloidFullStack.Controllers
     public class CommentController : ControllerBase
     {
         private readonly ICommentRepository _commentRepository;
-        //private readonly IPostRepository _postRepositroy;
         public CommentController(ICommentRepository commentRepository)
         {
             _commentRepository = commentRepository;
         }
 
         [HttpGet("GetCommentsByPostId")]
-        public IActionResult GetCommentsByPostId(int id)
+        public IActionResult GetCommentsByPostId(int postId)
         {
-            var comments = _commentRepository.GetCommentsByPostId(id);
+            var comments = _commentRepository.GetCommentsByPostId(postId).OrderByDescending(c => c.CreateDateTime)
+        .ToList();
 
-            if (id == null || comments == null)
+
+            if ( comments == null)
             {
                 return NotFound();
             }

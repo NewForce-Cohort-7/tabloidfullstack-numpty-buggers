@@ -1,6 +1,0 @@
-const apiUrl = "https://localhost:5001";
-
-export const getAllComments = () => {
-    return fetch(`${apiUrl}api/Comment`)
-    .then((res) => res.json())
-};

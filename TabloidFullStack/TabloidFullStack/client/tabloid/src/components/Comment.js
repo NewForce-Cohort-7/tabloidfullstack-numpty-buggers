@@ -13,10 +13,10 @@ export const Comment = ({comment}) => {
         </thead>
         <tbody>
           <tr>
-            <td>{comment.Content}</td>
-            <td>{comment.Subject}</td>
-            <td>{comment.UserProfileId}</td>
-            <td>{comment.CreateDateTime}</td>
+            <td>{comment.content}</td>
+            <td>{comment.subject}</td>
+            <td>{comment.userProfileId}</td>
+            <td>{comment.createDateTime}</td>
           </tr>
         </tbody>
       </Table>  
