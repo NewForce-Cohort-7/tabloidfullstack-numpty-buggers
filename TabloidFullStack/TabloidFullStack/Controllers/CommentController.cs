@@ -16,15 +16,15 @@ namespace TabloidFullStack.Controllers
         [HttpGet("GetCommentsByPostId")]
         public IActionResult GetCommentsByPostId(int postId)
         {
-            var comments = _commentRepository.GetCommentsByPostId(postId).OrderByDescending(c => c.CreateDateTime)
+            var comment = _commentRepository.GetCommentsByPostId(postId).OrderByDescending(c => c.CreateDateTime)
         .ToList();
 
 
-            if ( comments == null)
+            if ( comment == null)
             {
                 return NotFound();
             }
-            return Ok(comments);
+            return Ok(comment);
         }
     }
 }

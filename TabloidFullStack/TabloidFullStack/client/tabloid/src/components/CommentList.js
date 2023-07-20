@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import  {GetPostcommentsbyId}  from "../Managers/CommentManager";
 import { Table } from "reactstrap";
-import { Comment } from "./Comment.js";
+import { Comment } from "./Comment";
 import { useParams } from "react-router-dom";
 
 export const CommentList = () => {
@@ -9,12 +9,12 @@ export const CommentList = () => {
     const { postId } = useParams();
 
     const getcomments = () => {
-        GetPostcommentsbyId(postId).then(allComments => setComments(allComments));
+        GetPostcommentsbyId(postId).then((allComments) => setComments(allComments));
     };
 
     useEffect(() => {
         getcomments();
-    }, []);
+    }, [postId]);
 
 
     return (<>
@@ -30,9 +30,9 @@ export const CommentList = () => {
                   <th>Creation Date</th> */}
                 </tr>
               </thead>
-                {comments.map((comment) => {
-                  return  <Comment key={comment.id} comment={comment} />
-                })}
+                {comments.map((comment) => (
+                    <Comment key={comment.id} comment={comment} />
+                ))}
               </Table>
             </div>
           </div>
