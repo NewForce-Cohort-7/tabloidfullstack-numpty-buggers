@@ -24,7 +24,7 @@ export const PostDetails = () => {
   return (
     <Card>
         <CardTitle>Title: <b>{post.title}</b></CardTitle>
-        <CardImg top src={post.ImageLocation} alt="iMAgE Is bROkeN..." />
+        <CardImg top src={post.imageLocation} alt="iMAgE Is bROkeN..." />
         <CardBody>
             <CardText>{post.content}</CardText>
             <CardText>
