@@ -1,32 +1,35 @@
 import React from "react";
-import { Card, CardBody, CardFooter, Button} from "reactstrap";
+import { Card, CardBody, CardFooter, Button, pop} from "reactstrap";
 import { Link } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 
 export const Tag = ({ tag }) => {
+
+  const navigate = useNavigate()
+
+
 
   return (
       <Card className="m-4">
 
         <CardBody>
-          <p>
+
             
               <strong>{tag.name}</strong>
             
-        <CardFooter><div><Button
-       
-       className="btn btn-primary">
-       Edit
-   </Button></div>
-   
-        <div> <Button
-       
-       className="btn btn-primary">
-       Delete
-   </Button></div>    
+        <CardFooter>
+          <Button onClick={() => navigate(`/tags/edit/${tag.id}`)}>
+        Edit
+      </Button>     
+        <div>      
+        <Button onClick={() => navigate(`/tags/delete/${tag.id}`)}>
+        Delete
+      </Button>     </div>    
     </CardFooter> 
        
-          </p>
+       
         </CardBody>
       </Card>
   )}

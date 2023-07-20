@@ -22,12 +22,45 @@ namespace TabloidFullStack.Controllers
             return Ok(_tagRepository.GetAllTags());
         }
 
+        //get Tag by id
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var tag = _tagRepository.GetTagById(id);
+            if (tag == null)
+            {
+                return NotFound();
+            }
+            return Ok(tag);
+        }
+
+
         //add a tag
         [HttpPost]
         public IActionResult Post(Tag tag)
         {
             _tagRepository.Add(tag);
             return CreatedAtAction("Get", new { id = tag.Id }, tag);
+        }
+        //delete a tag
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _tagRepository.Delete(id);
+            return NoContent();
+        }
+
+        // edit a tag
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Tag tag)
+        {
+            if (id != tag.Id)
+            {
+                return BadRequest();
+            }
+
+            _tagRepository.Update(tag);
+            return NoContent();
         }
 
     }

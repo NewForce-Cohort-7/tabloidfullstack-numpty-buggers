@@ -7,6 +7,10 @@ export const getAllCategories = () => {
     .then((res) => res.json())
 };
 
+export const getCategoryById = (id) => {
+    return fetch(`${apiUrl}/api/category/${id}`).then((r) => r.json());
+}
+
 export const addCategory = (singleCategory) => {
     return fetch ("/api/category", {
         method: "POST",
@@ -22,4 +26,15 @@ export const deleteCategory = (id) => {
         method: "DELETE",
     })
     .then(() => getAllCategories())
+};
+
+export const editCategory = (category) => {
+    return fetch(`/api/category/${category.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(category)
+    })
+    .then(() => getAllCategories());
 }
