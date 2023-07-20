@@ -22,7 +22,8 @@ namespace TabloidFullStack.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_postRepository.GetAll());
+            var posts = _postRepository.GetAll().OrderByDescending(post => post.CreateDateTime);
+            return Ok(posts);
         }
 
         [HttpGet("GetUsersPosts/{id}")]
@@ -46,6 +47,14 @@ namespace TabloidFullStack.Controllers
             }
             return Ok(post);
         }
+
+        [HttpPost]
+        public IActionResult Post(Post post)
+        {
+            _postRepository.Add(post);
+            return CreatedAtAction("Get", new { id = post.Id }, post);
+        }
+
 
     }
 }

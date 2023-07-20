@@ -12,6 +12,7 @@ import { EditCategory } from "./EditCategory";
 import { PostDetails } from "./Posts/PostDetails";
 import { EditTag } from "./Tags/TagEdit";
 import { DeleteTag } from "./Tags/TagDelete";
+import { PostForm } from "./Posts/PostForm";
 
 export default function ApplicationViews() {
 
@@ -20,6 +21,7 @@ export default function ApplicationViews() {
         <Route path="/" element={<Hello />} />
         <Route path="/posts" element={<PostList />} />
         <Route path="/posts/:id" element={<PostDetails />} />
+        <Route path="/posts/add" element={<PostForm />} />
         <Route path="/myPosts" element={<UserPosts />} />
         <Route path="/login" element={<Login />} />
         <Route path="/category" element={<CategoryList />} />
