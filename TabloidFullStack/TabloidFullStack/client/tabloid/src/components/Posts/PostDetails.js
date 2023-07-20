@@ -13,8 +13,8 @@ export const PostDetails = () => {
 
 
   useEffect(() => {
-    getPostById(id).then(setPost);
-  }, []);
+    getPostById(id).then(setPost)
+  }, [])
 
   if (!post) {
     return null;
@@ -22,14 +22,14 @@ export const PostDetails = () => {
 
   const handleDelete = () => {
     deletePost(post.id).then(() => {
-      setShowAlert(false);
-      navigate(`/posts`); // Navigate to /posts after successful delete
+      setShowAlert(false)
+      navigate(`/posts`)
     });
   };
 
   const handleCancel = () => {
-    setShowAlert(false); // Cancel the delete
-  };
+    setShowAlert(false) 
+  }
 
   const deletePostAlert = () => {
     return (<>
