@@ -23,4 +23,11 @@ export const addPost = (singlePost) => {
         },
         body: JSON.stringify(singlePost)
     });
-};
+}
+
+export const deletePost = (id) => {
+    return fetch(`/api/post/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => getAllPosts())
+  };
