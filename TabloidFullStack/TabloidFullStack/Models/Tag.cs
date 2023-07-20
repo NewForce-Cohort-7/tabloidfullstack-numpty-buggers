@@ -4,6 +4,7 @@ namespace TabloidFullStack.Models
 {
     public class Tag
     {
+        
         public int Id { get; set; }
 
         [Required]

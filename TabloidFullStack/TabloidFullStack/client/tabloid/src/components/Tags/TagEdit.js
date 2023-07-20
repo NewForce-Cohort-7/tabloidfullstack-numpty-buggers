@@ -1,30 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"
-import { addTag} from "../../Managers/TagManager";
+import { useNavigate , useParams} from "react-router-dom"
+import { getTagById, updateTag} from "../../Managers/TagManager";
 import { Button } from "reactstrap";
 
 
-export const AddTag = () => {
+export const EditTag = () => {
   const [tag, update] = useState({
    name: "",
   
 })
-const navigate = useNavigate()
-const handleSaveButtonClick = (event) => {
-        event.preventDefault()
-        const tagToAPI = {
-            Name: tag.name,
-            
-        };
-    return addTag(tagToAPI)
-        .then(navigate("/tags"));
-};
 
+const { tagId } = useParams();
+const navigate = useNavigate()
+
+
+useEffect(() => {
+  getTagById(tagId) //route param
+        .then((tagArray)=>
+      {
+            update(tagArray) 
+        })
+}, [tagId]) //watch state - param
+
+const handleSaveButtonClick = (event) => {
+  event.preventDefault()
+updateTag(tag)
+.then(() => {
+    navigate ("/tags")
+})
+}
 
 
   return (
     <form className="tagForm">
-        <h2 className="tagForm__title">New Tag</h2>
+        <h2 className="tagForm__title">Edit Tag</h2>
         <fieldset>
             <div className="form-group">
                 
@@ -33,7 +42,6 @@ const handleSaveButtonClick = (event) => {
                     required autoFocus
                     type="text"
                     className="form-control"
-                    placeholder="what is your tag?"
                     value={tag.name}
                     onChange={ 
                         (event) => {
