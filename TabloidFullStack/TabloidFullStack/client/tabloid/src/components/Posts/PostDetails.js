@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardImg, CardBody, CardTitle, CardText, Button } from "reactstrap";
+import { Card, CardImg, CardBody, CardTitle, CardText, Button, Alert } from "reactstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deletePost, getPostById } from "../../Managers/PostManager";
 
 export const PostDetails = () => {
   const [post, setPost] = useState();
+  const [showAlert, setShowAlert] = useState(false)
   const { id } = useParams();
   const navigate = useNavigate();
+  const localTabloidUser = localStorage.getItem("userProfile");
+  const tabloidUserObject = JSON.parse(localTabloidUser)
+
 
   useEffect(() => {
     getPostById(id).then(setPost);
@@ -16,27 +20,51 @@ export const PostDetails = () => {
     return null;
   }
 
+  const handleDelete = () => {
+    deletePost(post.id).then(() => {
+      setShowAlert(false);
+      navigate(`/posts`); // Navigate to /posts after successful delete
+    });
+  };
+
+  const handleCancel = () => {
+    setShowAlert(false); // Cancel the delete
+  };
+
+  const deletePostAlert = () => {
+    return (<>
+    <Alert color="danger" key={'danger'}>
+      Are you sure you want to delete this post???
+      <br></br><Link onClick={handleDelete}>Yes</Link> / <Link onClick={handleCancel}>No</Link>
+    </Alert>
+    </>)
+  }
+
+  const deleteButtonForUser = () => {
+    if (post.userProfileId === tabloidUserObject.id) {
+      return <><Button
+      color="danger"
+      type="delete"
+      onClick={() => {
+        setShowAlert(true);      
+      }}> 
+      Delete
+    </Button>
+      {showAlert && deletePostAlert()}
+      </>
+    }
+  }
+
   return (
     <Card>
-        <CardTitle>Title: <b>{post.title}</b></CardTitle>
+        <CardTitle><b>{post.title}</b></CardTitle>
         <CardImg top src={post.imageLocation} alt="iMAgE Is bROkeN..." />
         <CardBody>
             <CardText>{post.content}</CardText>
             <CardText>
                 Posted on {post.createDateTime} by <b>{post?.userProfile?.displayName}</b>
             </CardText>
-            <Button
-              color="danger"
-              type="delete"
-              onClick={() => {
-                console.log("Delete button clicked");
-                deletePost(post.id).then(navigate(`/posts`))
-              }
-                
-              }
-            > 
-              Delete
-            </Button>
+          {deleteButtonForUser()}
 
         </CardBody>
     </Card>
