@@ -30,8 +30,8 @@ namespace TabloidFullStack.Models
         [DisplayName("Author")]
         public int UserProfileId { get; set; }
 
-        public UserProfile UserProfile { get; set; }
+        public UserProfile? UserProfile { get; set; }
 
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
     }
 }
