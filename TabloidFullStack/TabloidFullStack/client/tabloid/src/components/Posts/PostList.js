@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { getAllPosts } from "../../Managers/PostManager";
 import { Post } from "./Post";
-import { Table } from "reactstrap";
+import { Button, Table } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
 export const PostList = () => {
+    const navigate = useNavigate()
     const [posts, setPosts] = useState([]);
 
     const getPosts = () => {
@@ -14,11 +16,19 @@ export const PostList = () => {
         getPosts();
     }, [])
 
+    const create = () => {
+      navigate("/posts/add")
+    }
     //The Table is put here while the contents are in Post.js. This way the header doesn't pop up for each post
     return (<>
       <div className="post-list">
         <div className="row justify-content-center">
           <div className="cards-column">
+          <div>
+            <Button color="info" onClick={create}>
+              Create New
+            </Button>
+          </div>
             <Table> 
             <thead>
               <tr>
