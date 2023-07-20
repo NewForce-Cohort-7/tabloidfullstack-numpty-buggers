@@ -55,6 +55,12 @@ namespace TabloidFullStack.Controllers
             return CreatedAtAction("Get", new { id = post.Id }, post);
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _postRepository.Delete(id);
+            return NoContent();
+        }
 
     }
 }
