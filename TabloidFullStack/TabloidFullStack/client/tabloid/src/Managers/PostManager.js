@@ -33,12 +33,12 @@ export const deletePost = (id) => {
   };
 
   export const editPost = (post) => {
-    return fetch(`/api/post/${post.id}`, {
+    console.log(post)
+    return fetch(`/api/post/${post.Id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(post)
-    })
-    .then(() => getAllPosts());
+    }).then(() => getAllPosts())
 }

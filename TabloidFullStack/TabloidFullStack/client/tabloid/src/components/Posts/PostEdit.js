@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react"
-import {useNavigate} from "react-router-dom"
-import {addPost, getAllPosts} from "../../Managers/PostManager"
+import {useNavigate, useParams} from "react-router-dom"
+import {addPost, editPost, getAllPosts, getPostById} from "../../Managers/PostManager"
 import {getAllCategories} from "../../Managers/CategoryManager"
 
-export const PostForm = () => {
+export const PostEdit = () => {
     const navigate = useNavigate()
     const localTabloidUser = localStorage.getItem("userProfile");
     const tabloidUserObject = JSON.parse(localTabloidUser)
+    const { postId } = useParams();
     const [categories, setCategories] = useState([])
     
     const getCategories = () => {
@@ -21,26 +22,39 @@ export const PostForm = () => {
         title: "",
         content: "",
         imageLocation: "",
-        categoryId: 0,
+        userProfileId: tabloidUserObject.id,
+        createDateTime: Date.now(),
+        publishDateTime: Date.now(),
+        isApproved: true,
+        categoryId: 0
     })
 
-    const handleSaveButtonClick = (event) => {
-        event.preventDefault()
+    useEffect(() => {
+        getPostById(postId)
+        .then((postArray) => {
+            update(postArray)
+        })
+    }, [postId]);
 
-        // LEFT OFF HERE
-        const postToSendToAPI = {
+    const handleSaveButtonClick = (e) => {
+        e.preventDefault()
+
+        const postToEdit = {
+            Id: parseInt(postId),
             Title: post.title,
             Content: post.content,
             ImageLocation: post.imageLocation,
-            CreateDateTime: new Date().toISOString(),
-            PublishDateTime: new Date().toISOString(),
+            CreateDateTime: post.createDateTime,
+            PublishDatetime: new Date().toISOString(),
+            IsApproved: true,
             IsApproved: true,
             CategoryId: post.categoryId,
-            UserProfileId: tabloidUserObject.id
+            UserProfileId: post.userProfileId
         }
-
-        // I couldn't get it to navigate me to the post I just created
-        return addPost(postToSendToAPI).then(navigate(`/posts`))
+        return editPost(postToEdit)
+            .then(() => {
+                navigate(`/posts`)
+            })
     }
 
     const selectList = (event) => {

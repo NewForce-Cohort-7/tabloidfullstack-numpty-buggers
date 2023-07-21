@@ -70,6 +70,7 @@ export const PostDetails = () => {
             </CardText>
             <Button onClick={() => navigate(`/commentsbyId/${post.id}`)}>View Comments</Button>
             {deleteButtonForUser()}
+            <Button color="warning" onClick={() => navigate(`/posts/edit/${post.id}`)}>Edit</Button>
 
         </CardBody>
     </Card>

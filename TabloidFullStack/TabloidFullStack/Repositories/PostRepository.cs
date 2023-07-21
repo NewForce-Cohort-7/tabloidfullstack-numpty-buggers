@@ -226,7 +226,7 @@ namespace TabloidFullStack.Repositories
                                Content = @Content,
                                ImageLocation = @ImageLocation,
                                CreateDateTime = @CreateDateTime,
-                               PublishDateTime = @PublishDateTime,
+                               PublishDatetime = @PublishDateTime,
                                IsApproved = @IsApproved,
                                CategoryId = @CategoryId,
                                UserProfileId = @UserProfileId
