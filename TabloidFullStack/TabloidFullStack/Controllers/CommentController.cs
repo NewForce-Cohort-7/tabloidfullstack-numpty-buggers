@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
+using TabloidFullStack.Models;
 using TabloidFullStack.Repositories;
 
 namespace TabloidFullStack.Controllers
@@ -20,11 +22,17 @@ namespace TabloidFullStack.Controllers
         .ToList();
 
 
-            if ( comment == null)
+            if (comment == null)
             {
                 return NotFound();
             }
             return Ok(comment);
+        }
+        [HttpPost]
+        public IActionResult AddComment(Comment comment)
+        {
+            _commentRepository.AddComment(comment);
+            return CreatedAtAction("Get", new { id = post.Id }, post);
         }
     }
 }

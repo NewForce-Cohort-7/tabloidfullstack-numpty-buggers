@@ -30,9 +30,9 @@ export const CommentList = () => {
                   <th>Creation Date</th> */}
                 </tr>
               </thead>
-                {comments.map((comment) => (
-                    <Comment key={comment.id} comment={comment} />
-                ))}
+                {comments.map((comment) => {
+                   return <Comment key={comment.id} comment={comment} />
+                })}
               </Table>
             </div>
           </div>

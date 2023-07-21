@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardImg, CardBody, CardTitle, CardText, Button } from "reactstrap";
-import { Link, useParams } from "react-router-dom";
-import { getPostById } from "../../Managers/PostManager";
-import { useNavigate } from "react-router-dom";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deletePost, getPostById } from "../../Managers/PostManager";
 
@@ -19,9 +16,9 @@ export const PostDetails = () => {
     return null;
   }
   
-  const getCommentsForId = (e) => {
-    navigate("/commentsbyId")
-  }
+  // const getCommentsForId = () => {
+  //   navigate(`/commentsbyId/${postId}`)
+  // }
 
   return (
     <Card>
@@ -32,7 +29,7 @@ export const PostDetails = () => {
             <CardText>
                 Posted on {post.createDateTime} by <b>{post?.userProfile?.displayName}</b>
             </CardText>
-            <Button onClick={getCommentsForId}>View Comments</Button>
+            <Button onClick={() => navigate(`/commentsbyId/${post.id}`)}>View Comments</Button>
             <Button
               color="danger"
               type="delete"
