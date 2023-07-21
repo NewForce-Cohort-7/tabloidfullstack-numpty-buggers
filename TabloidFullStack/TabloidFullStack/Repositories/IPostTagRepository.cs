@@ -1,6 +1,10 @@
-﻿namespace TabloidFullStackRepositories
+﻿using TabloidFullStack.Models;
+
+namespace TabloidFullStackRepositories
 {
-    internal interface IPostTagRepository
+    public interface IPostTagRepository
     {
+        public List<Tag> GetAllPostsTags(int id);
+
     }
 }
