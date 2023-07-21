@@ -32,7 +32,7 @@ namespace TabloidFullStack.Controllers
         public IActionResult AddComment(Comment comment)
         {
             _commentRepository.AddComment(comment);
-            return CreatedAtAction("Get", new { id = post.Id }, post);
+            return CreatedAtAction("Get", new { id = comment.Id }, comment);
         }
     }
 }
