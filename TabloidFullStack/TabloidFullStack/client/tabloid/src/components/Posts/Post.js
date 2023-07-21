@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 //This function is in charge of the contents of each individual post. It uses the prop "post" to get state from PostList.js or UserPosts.js
 export const Post = ({ post }) => {
+
   return (
       <tbody>
         <tr>
