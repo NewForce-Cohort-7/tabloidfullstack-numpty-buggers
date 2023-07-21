@@ -42,8 +42,6 @@ namespace TabloidFullStackRepositories
                 }
             }
         }
-            
-
             public void AddTagToPost(Post post, Tag tag)
             {
                 using (SqlConnection conn = Connection)
