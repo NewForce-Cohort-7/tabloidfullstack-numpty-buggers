@@ -18,7 +18,8 @@ export const DeleteCategory = () => {
             })
     }, [categoryId])
 
-    const handleDelete = () => {
+    const handleDelete = (event) => {
+        event.preventDefault()
         deleteCategory(category.id)
             .then(() => {
                 navigate("/category")
