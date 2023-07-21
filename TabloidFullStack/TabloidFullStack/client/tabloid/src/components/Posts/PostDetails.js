@@ -19,6 +19,10 @@ export const PostDetails = () => {
   if (!post) {
     return null;
   }
+  
+  // const getCommentsForId = () => {
+  //   navigate(`/commentsbyId/${postId}`)
+  // }
 
   const handleDelete = () => {
     deletePost(post.id).then(() => {
@@ -64,15 +68,21 @@ export const PostDetails = () => {
             <CardText>
                 Posted on {post.createDateTime} by <b>{post?.userProfile?.displayName}</b>
             </CardText>
-          {deleteButtonForUser()}
+            <Button onClick={() => navigate(`/commentsbyId/${post.id}`)}>View Comments</Button>
+            <Button
+              color="danger"
+              type="delete"
+              onClick={() => {
+                console.log("Delete button clicked");
+                deletePost(post.id).then(navigate(`/posts`))
+              }
+                
+              }
+            > 
+              Delete
+            </Button>
 
         </CardBody>
     </Card>
   );
 };
-
-
-
-
-
-
