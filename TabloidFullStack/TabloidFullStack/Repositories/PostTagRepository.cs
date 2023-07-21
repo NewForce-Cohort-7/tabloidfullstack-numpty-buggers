@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using TabloidFullStack.Models;
 using TabloidFullStack.Repositories;
 using TabloidFullStack.Utils;
+using Azure;
 
 
 namespace TabloidFullStackRepositories
@@ -42,7 +43,7 @@ namespace TabloidFullStackRepositories
                 }
             }
         }
-            public void AddTagToPost(Post post, Tag tag)
+            public void AddTagToPost(PostTag postTag)
             {
                 using (SqlConnection conn = Connection)
                 {
@@ -53,13 +54,23 @@ namespace TabloidFullStackRepositories
                             @"INSERT INTO PostTag (PostId, TagId)
                         OUTPUT INSERTED.Id
                         VALUES (@postId, @tagId)";
-                        cmd.Parameters.AddWithValue("@postId", post.Id);
-                        cmd.Parameters.AddWithValue("@tagId", tag.Id);
+                    // set paramter values for the tag and post ID
+                    cmd.Parameters.AddWithValue("@postId", postTag.PostId);
+                    cmd.Parameters.AddWithValue("@tagId", postTag.TagId);
 
-                        cmd.ExecuteNonQuery();
-                    }
+                    postTag.Id = (int)cmd.ExecuteScalar();
+                }
                 }
             }
+
+
+
+
+
+
+
+
+
         public void DeleteTagFromPost(int postId, int tagId)
         {
             using (SqlConnection conn = Connection)
@@ -79,4 +90,3 @@ namespace TabloidFullStackRepositories
     }
 
     }
-}

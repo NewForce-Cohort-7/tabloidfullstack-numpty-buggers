@@ -33,5 +33,7 @@ namespace TabloidFullStack.Models
         public UserProfile? UserProfile { get; set; }
 
         public Category? Category { get; set; }
+        public List<Tag> Tags { get; set; } //added to get all the tags assigned to a post
+
     }
 }

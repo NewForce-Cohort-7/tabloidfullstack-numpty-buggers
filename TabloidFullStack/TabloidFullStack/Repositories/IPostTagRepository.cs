@@ -6,5 +6,8 @@ namespace TabloidFullStackRepositories
     {
         public List<Tag> GetAllPostsTags(int id);
 
+        void AddTagToPost(PostTag postTag);
+
+        void DeleteTagFromPost(int postId, int tagId);
     }
 }

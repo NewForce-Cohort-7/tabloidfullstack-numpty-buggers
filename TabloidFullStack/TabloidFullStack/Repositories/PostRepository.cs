@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using TabloidFullStack.Models;
 using TabloidFullStack.Utils;
+using Microsoft.Extensions.Hosting;
 
 namespace TabloidFullStack.Repositories
 {
@@ -132,9 +133,15 @@ namespace TabloidFullStack.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT p.Id AS PId, p.Title, p.Content, p.ImageLocation AS PImage, p.CreateDateTime AS PCreateDate, p.PublishDateTime, p.IsApproved, p.CategoryId, p.UserProfileId, up.Id AS UId, up.DisplayName, up.FirstName, up.LastName, up.Email, up.CreateDateTime AS UPCreateDate, up.ImageLocation AS UPImage, up.UserTypeId FROM Post p                        
-                        LEFT JOIN UserProfile up ON up.Id = p.UserProfileId  
-                          WHERE p.Id = @id";
+                        SELECT p.Id AS PId, p.Title, p.Content, p.ImageLocation AS PImage, p.CreateDateTime AS PCreateDate, p.PublishDateTime, p.IsApproved, p.CategoryId, p.UserProfileId, 
+                up.Id AS UId, up.DisplayName, up.FirstName, up.LastName, up.Email, up.CreateDateTime AS UPCreateDate, up.ImageLocation AS UPImage, up.UserTypeId, 
+                pt.Id as PostTagId, pt.PostId as PostTagPostId, pt.TagId as PostTagTagId,
+                t.Id AS TagId, t.Name
+                FROM Post p                        
+                LEFT JOIN UserProfile up ON up.Id = p.UserProfileId  
+                LEFT JOIN PostTag pt on pt.PostId = p.Id
+                LEFT JOIN Tag t on t.Id = pt.TagId
+                WHERE p.Id = @id";
 
                     DbUtils.AddParameter(cmd, "@id", id);
 
@@ -162,59 +169,69 @@ namespace TabloidFullStack.Repositories
                                 CreateDateTime = DbUtils.GetDateTime(reader, "UPCreateDate"),
                                 ImageLocation = DbUtils.GetString(reader, "UPImage"),
                                 UserTypeId = DbUtils.GetInt(reader, "UserTypeId")
-                            }
+                            },
+
+                            Tags = new List<Tag>()
                         };
                     }
 
-                    reader.Close();
+                    if (DbUtils.IsNotDbNull(reader, "TagId") && !post.Tags.Any(x => x.Id == DbUtils.GetNullableInt(reader, "TagId")))
+                    {
+                        post.Tags.Add(new Tag
+                        {
+                            Id = DbUtils.GetInt(reader, "TagId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                        });
+                 
+                    }
+            
+                reader.Close();
 
-                    return post;
-                }
+                return post;
             }
         }
+    }
 
-        public void Add(Post post)
+    public void Add(Post post)
+    {
+        using (var conn = Connection)
         {
-            using (var conn = Connection)
+            conn.Open();
+            using (var cmd = conn.CreateCommand())
             {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
+                cmd.CommandText = @"
                         INSERT INTO Post (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
                         OUTPUT INSERTED.ID
                         VALUES (@title, @content, @imageLocation, @createDateTime, @publishDateTime, @isApproved, @categoryId, @UserProfileId)";
 
-                    DbUtils.AddParameter(cmd, "@title", post.Title);
-                    DbUtils.AddParameter(cmd, "@content", post.Content);
-                    DbUtils.AddParameter(cmd, "@imageLocation", post.ImageLocation);
-                    DbUtils.AddParameter(cmd, "@createDateTime", post.CreateDateTime);
-                    DbUtils.AddParameter(cmd, "@publishDateTime", post.PublishDatetime);
-                    DbUtils.AddParameter(cmd, "@isApproved", post.IsApproved);
-                    DbUtils.AddParameter(cmd, "@categoryId", post.CategoryId);
-                    DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
+                DbUtils.AddParameter(cmd, "@title", post.Title);
+                DbUtils.AddParameter(cmd, "@content", post.Content);
+                DbUtils.AddParameter(cmd, "@imageLocation", post.ImageLocation);
+                DbUtils.AddParameter(cmd, "@createDateTime", post.CreateDateTime);
+                DbUtils.AddParameter(cmd, "@publishDateTime", post.PublishDatetime);
+                DbUtils.AddParameter(cmd, "@isApproved", post.IsApproved);
+                DbUtils.AddParameter(cmd, "@categoryId", post.CategoryId);
+                DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
 
 
-                    post.Id = (int)cmd.ExecuteScalar();
-                }
+                post.Id = (int)cmd.ExecuteScalar();
             }
         }
-
-        public void Delete(int id)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "DELETE FROM Post WHERE Id = @Id";
-                    DbUtils.AddParameter(cmd, "@id", id);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-
-
     }
-}
+
+    public void Delete(int id)
+    {
+        using (var conn = Connection)
+        {
+            conn.Open();
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "DELETE FROM Post WHERE Id = @Id";
+                DbUtils.AddParameter(cmd, "@id", id);
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+
+}}

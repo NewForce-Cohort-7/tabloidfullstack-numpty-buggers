@@ -3,65 +3,55 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using TabloidFullStack.Repositories;
 using TabloidFullStack.Models;
+using TabloidFullStackRepositories;
 
 namespace TabloidFullStack.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TagController : ControllerBase
+    public class PostTagController : ControllerBase
     {
-        private readonly ITagRepository _tagRepository;
-        public TagController(ITagRepository tagRepository)
+        private readonly IPostTagRepository _postTagRepository;
+        public PostTagController(IPostTagRepository postTagRepository)
         {
-            _tagRepository = tagRepository;
+            _postTagRepository = postTagRepository;
         }
-        //get all of the tags
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(_tagRepository.GetAllTags());
-        }
+        ////get all postTags
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    return Ok(_postTagRepository.GetAllTags());
+        //}
 
-        //get Tag by id
+        //get a posts tags by id
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult GetTagsForPost(int id)
         {
-            var tag = _tagRepository.GetTagById(id);
-            if (tag == null)
+            var postsTags = _postTagRepository.GetAllPostsTags(id);
+            if (postsTags == null)
             {
-                return NotFound();
+                return NotFound(); //if there are no tags
             }
-            return Ok(tag);
+            return Ok(postsTags); //if there are tags
         }
 
 
-        //add a tag
+        //add a tag to a post
         [HttpPost]
-        public IActionResult Post(Tag tag)
+        public IActionResult AddPostTag(PostTag postTag)
         {
-            _tagRepository.Add(tag);
-            return CreatedAtAction("Get", new { id = tag.Id }, tag);
+            _postTagRepository.AddTagToPost(postTag);
+            return CreatedAtAction("Get", new { id = postTag.Id }, postTag);
         }
         //delete a tag
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult DeletePostTag(int postId, int tagId)
         {
-            _tagRepository.Delete(id);
+            _postTagRepository.DeleteTagFromPost(postId, tagId);
             return NoContent();
         }
 
-        // edit a tag
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Tag tag)
-        {
-            if (id != tag.Id)
-            {
-                return BadRequest();
-            }
-
-            _tagRepository.Update(tag);
-            return NoContent();
-        }
+    
 
     }
 }
