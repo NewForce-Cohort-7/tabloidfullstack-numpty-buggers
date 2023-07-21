@@ -15,6 +15,7 @@ import { DeleteTag } from "./Tags/TagDelete";
 import { CommentList } from "./CommentList.js";
 import { PostForm } from "./Posts/PostForm";
 import { DeleteCategory } from "./Categories/DeleteCategory";
+import { PostEdit } from "./Posts/PostEdit";
 
 export default function ApplicationViews() {
 
@@ -24,6 +25,7 @@ export default function ApplicationViews() {
         <Route path="/posts" element={<PostList />} />
         <Route path="/posts/:id" element={<PostDetails />} />
         <Route path="/posts/add" element={<PostForm />} />
+        <Route path="/posts/edit/:postId" element={<PostEdit />} />
         <Route path="/myPosts" element={<UserPosts />} />
         <Route path="/login" element={<Login />} />
         <Route path="/category" element={<CategoryList />} />
