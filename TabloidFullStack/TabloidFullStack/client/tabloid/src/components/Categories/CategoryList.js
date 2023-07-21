@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllCategories, deleteCategory } from "../../Managers/CategoryManager";
+import { getAllCategories } from "../../Managers/CategoryManager";
 import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
