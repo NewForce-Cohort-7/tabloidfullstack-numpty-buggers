@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Card, CardImg, CardBody, CardTitle, CardText, Button, Alert } from "reactstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deletePost, getPostById } from "../../Managers/PostManager";
-
+import { getAllPostTags, addPostTag } from "../../Managers/PostTagManager";
 export const PostDetails = () => {
   const [post, setPost] = useState();
+  const [tag, setTag ] = useState();
   const [showAlert, setShowAlert] = useState(false)
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,6 +15,10 @@ export const PostDetails = () => {
 
   useEffect(() => {
     getPostById(id).then(setPost)
+    getAllPostTags(id).then(setTag);
+        
+
+
   }, [])
 
   if (!post) {
@@ -67,6 +72,9 @@ export const PostDetails = () => {
             <CardText>{post.content}</CardText>
             <CardText>
                 Posted on {post.createDateTime} by <b>{post?.userProfile?.displayName}</b>
+                <div>
+                Tags: {post.tags.map((tag) => <p>{tag.name}</p>)} 
+              </div>
             </CardText>
             <Button onClick={() => navigate(`/commentsbyId/${post.id}`)}>View Comments</Button>
             <Button
@@ -81,6 +89,10 @@ export const PostDetails = () => {
             > 
               Delete
             </Button>
+            < Button onClick={(e) => {
+            navigate(`/addTag/${id}`)
+          }} 
+          >Manage Tags</Button>
 
         </CardBody>
     </Card>
