@@ -69,18 +69,8 @@ export const PostDetails = () => {
                 Posted on {post.createDateTime} by <b>{post?.userProfile?.displayName}</b>
             </CardText>
             <Button onClick={() => navigate(`/commentsbyId/${post.id}`)}>View Comments</Button>
-            <Button
-              color="danger"
-              type="delete"
-              onClick={() => {
-                console.log("Delete button clicked");
-                deletePost(post.id).then(navigate(`/posts`))
-              }
-                
-              }
-            > 
-              Delete
-            </Button>
+            {deleteButtonForUser()}
+            <Button color="warning" onClick={() => navigate(`/posts/edit/${post.id}`)}>Edit</Button>
 
         </CardBody>
     </Card>
