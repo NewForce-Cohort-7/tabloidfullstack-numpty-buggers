@@ -16,6 +16,7 @@ import { CommentList } from "./CommentList.js";
 import { PostForm } from "./Posts/PostForm";
 import { DeleteCategory } from "./Categories/DeleteCategory";
 import { PostEdit } from "./Posts/PostEdit";
+import { UserProfileList } from "./userProfiles/UserProfileList";
 
 export default function ApplicationViews() {
 
@@ -37,6 +38,7 @@ export default function ApplicationViews() {
         <Route path = "/commentsbyId/:postId" element={<CommentList/>} />
         <Route path="/tags/edit/:tagId" element={<EditTag/>} />
         <Route path="/tags/delete/:tagId" element={<DeleteTag/>} />
+        <Route path="/users" element={<UserProfileList />} />
 
       </Routes>
    );
