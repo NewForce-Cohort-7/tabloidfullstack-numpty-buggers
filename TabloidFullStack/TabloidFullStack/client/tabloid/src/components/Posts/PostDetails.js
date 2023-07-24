@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Card, CardImg, CardBody, CardTitle, CardText, Button, Alert } from "reactstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deletePost, getPostById } from "../../Managers/PostManager";
-import { getAllPostTags, addPostTag } from "../../Managers/PostTagManager";
+import { getAllPostTags} from "../../Managers/PostTagManager";
+
 export const PostDetails = () => {
   const [post, setPost] = useState();
   const [tag, setTag ] = useState();
@@ -73,7 +74,7 @@ export const PostDetails = () => {
             <CardText>
                 Posted on {post.createDateTime} by <b>{post?.userProfile?.displayName}</b>
                 <div>
-                Tags: {post.tags.map((tag) => <p>{tag.name}</p>)} 
+                Tag: {post.tags.map((tag) => <p>{tag.name}</p>)} 
               </div>
             </CardText>
             <Button onClick={() => navigate(`/commentsbyId/${post.id}`)}>View Comments</Button>
@@ -89,7 +90,7 @@ export const PostDetails = () => {
             > 
               Delete
             </Button>
-            < Button onClick={(e) => {
+            < Button onClick={(addtag) => {
             navigate(`/addTag/${id}`)
           }} 
           >Manage Tags</Button>
