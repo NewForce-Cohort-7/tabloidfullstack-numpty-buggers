@@ -78,18 +78,7 @@ export const PostDetails = () => {
               </div>
             </CardText>
             <Button onClick={() => navigate(`/commentsbyId/${post.id}`)}>View Comments</Button>
-            <Button
-              color="danger"
-              type="delete"
-              onClick={() => {
-                console.log("Delete button clicked");
-                deletePost(post.id).then(navigate(`/posts`))
-              }
-                
-              }
-            > 
-              Delete
-            </Button>
+         
             < Button onClick={(addtag) => {
             navigate(`/addTag/${id}`)
           }} 
