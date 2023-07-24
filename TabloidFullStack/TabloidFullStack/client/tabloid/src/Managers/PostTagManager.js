@@ -3,7 +3,7 @@ const apiUrl = "https://localhost:5001"
 
 //add a postTag to a post
 export const addPostTag = (singlePostTag) => {
-    return fetch(baseUrl, {
+    return fetch(`${apiUrl}/${baseUrl}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
