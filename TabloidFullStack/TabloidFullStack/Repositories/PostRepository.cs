@@ -217,8 +217,7 @@ namespace TabloidFullStack.Repositories
                 post.Id = (int)cmd.ExecuteScalar();
             }
         }
-<<<<<<< HEAD
-=======
+    }
 
         public void Delete(int id)
         {
@@ -269,22 +268,5 @@ namespace TabloidFullStack.Repositories
         }
 
 
->>>>>>> main
     }
-
-    public void Delete(int id)
-    {
-        using (var conn = Connection)
-        {
-            conn.Open();
-            using (var cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = "DELETE FROM Post WHERE Id = @Id";
-                DbUtils.AddParameter(cmd, "@id", id);
-                cmd.ExecuteNonQuery();
-            }
-        }
-    }
-
-
-}}
+}

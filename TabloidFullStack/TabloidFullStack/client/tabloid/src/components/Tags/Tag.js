@@ -29,7 +29,7 @@ export const TagAndButton = ({ tag, post}) => {
             
               <strong>{tag.name}</strong>
               <button className="btn btn-primary" onClick={()=>{ savePostTag() }}>
-              Add Tag
+              Assign Tag
           </button>   
         <CardFooter>
           <Button onClick={() => navigate(`/tags/edit/${tag.id}`)}>
