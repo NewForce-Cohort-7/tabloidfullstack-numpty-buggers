@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using TabloidFullStack.Models;
 using TabloidFullStack.Repositories;
 
@@ -22,6 +23,17 @@ namespace TabloidFullStack.Controllers
     public IActionResult Get()
         {
         return Ok(_userProfileRepository.GetAll());
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult Get(int id)
+        {
+        var userProfile = _userProfileRepository.GetUserProfileById(id);
+        if (userProfile == null)
+            {
+            return NotFound();
+        }
+        return Ok(userProfile);
     }
 
     [HttpGet("GetByEmail")]
