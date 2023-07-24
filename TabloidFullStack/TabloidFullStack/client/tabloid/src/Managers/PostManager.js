@@ -1,6 +1,6 @@
 //THESE URL'S MUST MATCH EXACTLY HOW THEY SHOW IN SWAGGER (ie BACKEND)
 const baseUrl = '/api/post';
-const apiUrl = "https://localhost:5001"
+
 //Fetching every single post in the database
 export const getAllPosts = () => {
     return fetch(baseUrl).then((res) => res.json())
@@ -16,7 +16,7 @@ export const getPostById = (id) => {
 }
 
 export const addPost = (singlePost) => {
-    return fetch(`${apiUrl}${baseUrl}`, {
+    return fetch(baseUrl, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
