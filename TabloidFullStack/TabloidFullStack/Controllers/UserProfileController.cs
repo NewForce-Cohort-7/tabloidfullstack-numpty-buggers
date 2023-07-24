@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using TabloidFullStack.Models;
 using TabloidFullStack.Repositories;
 
@@ -9,13 +10,30 @@ namespace TabloidFullStack.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
-    { 
-     //private readonly IUserProfileRepository _userProfileRepository;
-        private readonly IUserRepository _userRepository;
-    public UserProfileController(IUserRepository userRepository)
     {
-        //_userProfileRepository = userProfileRepository;
-        _userRepository = userRepository;
+        private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IUserRepository _userRepository;
+    public UserProfileController(IUserRepository userRepository, IUserProfileRepository userProfileRepository)
+    {
+            _userProfileRepository = userProfileRepository;
+            _userRepository = userRepository;
+    }
+
+    [HttpGet]
+    public IActionResult Get()
+        {
+        return Ok(_userProfileRepository.GetAll());
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult Get(int id)
+        {
+        var userProfile = _userProfileRepository.GetUserProfileById(id);
+        if (userProfile == null)
+            {
+            return NotFound();
+        }
+        return Ok(userProfile);
     }
 
     [HttpGet("GetByEmail")]

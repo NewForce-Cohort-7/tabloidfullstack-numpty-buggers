@@ -31,3 +31,14 @@ export const deletePost = (id) => {
     })
       .then(() => getAllPosts())
   };
+
+  export const editPost = (post) => {
+    console.log(post)
+    return fetch(`/api/post/${post.Id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(post)
+    }).then(() => getAllPosts())
+}

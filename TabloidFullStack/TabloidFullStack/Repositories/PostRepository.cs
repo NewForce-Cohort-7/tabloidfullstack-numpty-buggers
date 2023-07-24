@@ -217,6 +217,59 @@ namespace TabloidFullStack.Repositories
                 post.Id = (int)cmd.ExecuteScalar();
             }
         }
+<<<<<<< HEAD
+=======
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Post WHERE Id = @Id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void Update(Post post)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Post
+                           SET Title = @Title,
+                               Content = @Content,
+                               ImageLocation = @ImageLocation,
+                               CreateDateTime = @CreateDateTime,
+                               PublishDatetime = @PublishDateTime,
+                               IsApproved = @IsApproved,
+                               CategoryId = @CategoryId,
+                               UserProfileId = @UserProfileId
+
+                         WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Title", post.Title);
+                    DbUtils.AddParameter(cmd, "@Content", post.Content);
+                    DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", post.CreateDateTime);
+                    DbUtils.AddParameter(cmd, "@PublishDateTime", post.PublishDatetime);
+                    DbUtils.AddParameter(cmd, "@IsApproved", post.IsApproved);
+                    DbUtils.AddParameter(cmd, "@CategoryId", post.CategoryId);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@Id", post.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+>>>>>>> main
     }
 
     public void Delete(int id)

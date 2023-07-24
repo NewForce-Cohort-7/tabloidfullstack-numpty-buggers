@@ -94,6 +94,8 @@ export const PostDetails = () => {
             navigate(`/addTag/${id}`)
           }} 
           >Manage Tags</Button>
+            {deleteButtonForUser()}
+            <Button color="warning" onClick={() => navigate(`/posts/edit/${post.id}`)}>Edit</Button>
 
         </CardBody>
     </Card>
