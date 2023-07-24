@@ -52,12 +52,10 @@ export const PostTags = () => {
                           
                         </tr>
                     </thead>
-                    {/* post?.tags?.length
-                    ?post?.tags?.map((pt) => ) */}
+                   
                     {tags.map((tag) => (
                         <TagAndButton 
                         tag={tag}
-                        //send other things I need to Tag.js
                         post={post}
                          />
                     ))}
