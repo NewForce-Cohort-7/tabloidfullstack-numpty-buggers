@@ -19,6 +19,7 @@ import { DeleteCategory } from "./Categories/DeleteCategory";
 import { PostEdit } from "./Posts/PostEdit";
 import { UserProfileList } from "./userProfiles/UserProfileList";
 import { CommentForm } from "./Comments/CommentForm.js";
+import { UserProfileDetails } from "./userProfiles/UserProfileDetails";
 
 export default function ApplicationViews() {
 
@@ -43,6 +44,7 @@ export default function ApplicationViews() {
         <Route path="/tags/delete/:tagId" element={<DeleteTag/>} />
         <Route path="/addtag/:id" element={<PostTags />} />
         <Route path="/users" element={<UserProfileList />} />
+        <Route path="/userprofiles/:userProfileId" element={<UserProfileDetails />} />
 
       </Routes>
    );
