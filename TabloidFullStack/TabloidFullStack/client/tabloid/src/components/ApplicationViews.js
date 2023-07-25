@@ -12,12 +12,13 @@ import { EditCategory } from "./Categories/EditCategory";
 import { PostDetails } from "./Posts/PostDetails";
 import { EditTag } from "./Tags/TagEdit";
 import { DeleteTag } from "./Tags/TagDelete";
-import { CommentList } from "./CommentList.js";
+import { CommentList } from "./Comments/CommentList.js";
 import { PostForm } from "./Posts/PostForm";
 import {PostTags }from "./Tags/PostTag";
 import { DeleteCategory } from "./Categories/DeleteCategory";
 import { PostEdit } from "./Posts/PostEdit";
 import { UserProfileList } from "./userProfiles/UserProfileList";
+import { CommentForm } from "./Comments/CommentForm.js";
 
 export default function ApplicationViews() {
 
@@ -37,6 +38,7 @@ export default function ApplicationViews() {
         <Route path ="/tags" element ={<TagList />}/>
         <Route path="/tags/newtag" element={<AddTag/>} />
         <Route path = "/commentsbyId/:postId" element={<CommentList/>} />
+        <Route path = "/addComment" element = {<CommentForm/>} />
         <Route path="/tags/edit/:tagId" element={<EditTag/>} />
         <Route path="/tags/delete/:tagId" element={<DeleteTag/>} />
         <Route path="/addtag/:id" element={<PostTags />} />

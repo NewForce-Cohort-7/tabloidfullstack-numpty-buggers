@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import  {GetPostcommentsbyId}  from "../Managers/CommentManager";
+import  {GetPostcommentsbyId}  from "../../Managers/CommentManager";
 import { Table } from "reactstrap";
 import { Comment } from "./Comment";
 import { useParams } from "react-router-dom";
