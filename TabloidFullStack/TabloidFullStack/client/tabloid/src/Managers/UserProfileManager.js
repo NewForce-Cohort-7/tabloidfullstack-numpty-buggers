@@ -42,8 +42,8 @@ export const getAllUserProfiles = () => {
 };
 
 export const getUserProfileById = (id) => {
-  return fetch(`${apiUrl}/api/userprofile/${id}`).then((r) => r.json())
-}
+  return fetch(`${apiUrl}/api/userprofile/${id}`).then((r) => r.json());
+};
 
 
 

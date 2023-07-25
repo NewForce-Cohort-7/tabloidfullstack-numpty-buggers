@@ -4,17 +4,17 @@ import { getUserProfileById } from "../../Managers/UserProfileManager";
 import { Card, CardBody, CardImg, CardTitle, CardSubtitle, Button, Container, Row, Col } from "reactstrap";
 
 export const UserProfileDetails = () => {
-    const { id } = useParams();
+    const { userProfileId } = useParams();
     const [userProfile, setUserProfile] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
-        getUserProfileById(id)
+        getUserProfileById(userProfileId)
             .then(userProfileFromAPI => {
                 setUserProfile(userProfileFromAPI);
                 console.log(userProfileFromAPI)
             });
-    }, [id]);
+    }, []);
 
     return (
         <Container>
