@@ -71,7 +71,7 @@ namespace TabloidFullStack.Repositories
                                up.Email, up.CreateDateTime, up.ImageLocation, up.UserTypeId,
                                ut.[Name] AS UserTypeName
                         FROM UserProfile up
-                        LEFT JOIN UserType ut ON up.UserTypeId = ut.Id
+                        INNER JOIN UserType ut ON up.UserTypeId = ut.Id
                         WHERE up.Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);

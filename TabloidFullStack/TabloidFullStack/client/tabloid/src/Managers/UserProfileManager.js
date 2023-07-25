@@ -2,7 +2,6 @@
 
 
 
-
 const apiUrl = "https://localhost:5001";
 
 export const login = (userObject) => {
@@ -42,6 +41,9 @@ export const getAllUserProfiles = () => {
   .then((r) => r.json())
 };
 
+export const getUserProfileById = (id) => {
+  return fetch(`${apiUrl}/api/userprofile/${id}`).then((r) => r.json())
+}
 
 
 
