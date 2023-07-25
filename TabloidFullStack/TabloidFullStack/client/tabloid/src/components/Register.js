@@ -14,13 +14,14 @@ export default function Register({setIsLoggedIn}) {
   const [imageLocation, setImageLocation] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  const [type, setType] = useState();
 
   const registerClick = (e) => {
     e.preventDefault();
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
     } else {
-      const userProfile = { firstName, lastName, displayName, imageLocation, email };
+      const userProfile = { firstName, lastName, displayName, imageLocation, email, type};
       register(userProfile, password)
         .then(() => {
           setIsLoggedIn(true)
@@ -29,9 +30,23 @@ export default function Register({setIsLoggedIn}) {
     }
  };
 
+  // const adminOrAuthor = () => {
+  //   if (type === "1"){
+  //     setType("Admin")
+  //   }
+  // }
+
   return (
     <Form onSubmit={registerClick}>
       <fieldset>
+      <FormGroup>
+          <Label htmlFor="userType">User Type (Admin = 1, Author = 2)</Label>
+          <Input id="userType" type="text" onChange={
+            
+            e => setType(e.target.value)
+            
+            } />
+        </FormGroup>
         <FormGroup>
           <Label htmlFor="firstName">First Name</Label>
           <Input id="firstName" type="text" onChange={e => setFirstName(e.target.value)} />
