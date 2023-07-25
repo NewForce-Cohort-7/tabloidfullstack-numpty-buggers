@@ -30,11 +30,17 @@ export default function Register({setIsLoggedIn}) {
     }
  };
 
-  // const adminOrAuthor = () => {
-  //   if (type === "1"){
-  //     setType("Admin")
-  //   }
-  // }
+  const adminOrAuthor = (e) => {
+    e.preventDefault
+    if (e.target.value === 1){
+      setType("Admin")
+    } else if (e.target.value === 2) {
+      setType("Author")
+    } else {
+      return "please enter '1' or '2'."
+    }
+  
+  }
 
   return (
     <Form onSubmit={registerClick}>
@@ -43,8 +49,8 @@ export default function Register({setIsLoggedIn}) {
           <Label htmlFor="userType">User Type (Admin = 1, Author = 2)</Label>
           <Input id="userType" type="text" onChange={
             
-            e => setType(e.target.value)
-            
+            // e => setType(e.target.value)
+            adminOrAuthor
             } />
         </FormGroup>
         <FormGroup>
