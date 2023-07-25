@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Card, CardImg, CardBody, CardTitle, CardText, Button, Alert } from "reactstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deletePost, getPostById } from "../../Managers/PostManager";
+import { getAllPostTags} from "../../Managers/PostTagManager";
 
 export const PostDetails = () => {
   const [post, setPost] = useState();
+  const [tag, setTag ] = useState();
   const [showAlert, setShowAlert] = useState(false)
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,6 +16,10 @@ export const PostDetails = () => {
 
   useEffect(() => {
     getPostById(id).then(setPost)
+    getAllPostTags(id).then(setTag);
+        
+
+
   }, [])
 
   if (!post) {
@@ -67,8 +73,16 @@ export const PostDetails = () => {
             <CardText>{post.content}</CardText>
             <CardText>
                 Posted on {post.createDateTime} by <b>{post?.userProfile?.displayName}</b>
+                <div>
+                Tag: {post.tags.map((tag) => <p>{tag.name}</p>)} 
+              </div>
             </CardText>
             <Button onClick={() => navigate(`/commentsbyId/${post.id}`)}>View Comments</Button>
+         
+            < Button onClick={(addtag) => {
+            navigate(`/addTag/${id}`)
+          }} 
+          >Manage Tags</Button>
             {deleteButtonForUser()}
             <Button color="warning" onClick={() => navigate(`/posts/edit/${post.id}`)}>Edit</Button>
 
