@@ -14,14 +14,20 @@ export default function Register({setIsLoggedIn}) {
   const [imageLocation, setImageLocation] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
-  const [type, setType] = useState();
+  const [userType, setUserType] = useState("");
 
   const registerClick = (e) => {
     e.preventDefault();
+    if (!userType) {
+      alert("Please select a User Type (Admin or Author).");
+      return;
+    }
+
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
+
     } else {
-      const userProfile = { firstName, lastName, displayName, imageLocation, email, type};
+      const userProfile = { firstName, lastName, displayName, imageLocation, email, userType};
       register(userProfile, password)
         .then(() => {
           setIsLoggedIn(true)
@@ -31,13 +37,15 @@ export default function Register({setIsLoggedIn}) {
  };
 
   const adminOrAuthor = (e) => {
-    e.preventDefault
-    if (e.target.value === 1){
-      setType("Admin")
-    } else if (e.target.value === 2) {
-      setType("Author")
+    e.preventDefault();
+    const userTypeValue = parseInt(e.target.value);
+    if (userTypeValue === 1){
+      setUserType({ id: 1, name: "Admin"})
+    } else if (userTypeValue === 2) {
+      setUserType({ id: 2, name: "Author"})
     } else {
-      return "please enter '1' or '2'."
+      alert("Please enter '1' or '2'.")
+      setUserType("")
     }
   
   }
@@ -49,7 +57,7 @@ export default function Register({setIsLoggedIn}) {
           <Label htmlFor="userType">User Type (Admin = 1, Author = 2)</Label>
           <Input id="userType" type="text" onChange={
             
-            // e => setType(e.target.value)
+            // e => setUserType(e.target.value)
             adminOrAuthor
             } />
         </FormGroup>
