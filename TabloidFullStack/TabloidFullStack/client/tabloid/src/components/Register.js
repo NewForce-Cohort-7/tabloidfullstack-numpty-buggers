@@ -15,6 +15,7 @@ export default function Register({setIsLoggedIn}) {
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [userType, setUserType] = useState("");
+  const [userTypeId, setUserTypeId] = useState();
 
   const registerClick = (e) => {
     e.preventDefault();
@@ -27,7 +28,7 @@ export default function Register({setIsLoggedIn}) {
       alert("Passwords don't match. Do better.");
 
     } else {
-      const userProfile = { firstName, lastName, displayName, imageLocation, email, userType};
+      const userProfile = { firstName, lastName, displayName, imageLocation, email, userType, userTypeId};
       register(userProfile, password)
         .then(() => {
           setIsLoggedIn(true)
@@ -36,18 +37,20 @@ export default function Register({setIsLoggedIn}) {
     }
  };
 
+ //This is makes it so a new user can register as an author or admin. People wouldn't normally be given this ability in a real app and would need permissions. We could always uncomment the hard code in the userprofilecontroller in c# to automatically register authors.
   const adminOrAuthor = (e) => {
     e.preventDefault();
     const userTypeValue = parseInt(e.target.value);
     if (userTypeValue === 1){
       setUserType({ id: 1, name: "Admin"})
+      setUserTypeId(1)
     } else if (userTypeValue === 2) {
       setUserType({ id: 2, name: "Author"})
+      setUserTypeId(2)
     } else {
       alert("Please enter '1' or '2'.")
       setUserType("")
     }
-  
   }
 
   return (
@@ -55,11 +58,7 @@ export default function Register({setIsLoggedIn}) {
       <fieldset>
       <FormGroup>
           <Label htmlFor="userType">User Type (Admin = 1, Author = 2)</Label>
-          <Input id="userType" type="text" onChange={
-            
-            // e => setUserType(e.target.value)
-            adminOrAuthor
-            } />
+          <Input id="userType" type="text" onChange={adminOrAuthor} />
         </FormGroup>
         <FormGroup>
           <Label htmlFor="firstName">First Name</Label>
