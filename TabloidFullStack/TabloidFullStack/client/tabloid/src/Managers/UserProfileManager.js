@@ -45,6 +45,17 @@ export const getUserProfileById = (id) => {
   return fetch(`${apiUrl}/api/userprofile/${id}`).then((r) => r.json());
 };
 
+export const editUserProfile = (userProfile) => {
+  return fetch(`/api/userprofile/${userProfile.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userProfile)
+  })
+  .then(() => getAllUserProfiles());
+}
+
 
 
 

@@ -103,5 +103,36 @@ namespace TabloidFullStack.Repositories
 
             return userProfile;
         }
+
+        public void Update(UserProfile userProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+
+                    cmd.CommandText = @"
+                        UPDATE UserProfile
+                           SET DisplayName = @DisplayName,
+                               FirstName = @FirstName,
+                               LastName = @LastName,
+                               Email = @Email,
+                               ImageLocation = @ImageLocation,
+                               UserTypeId = @UserTypeId
+                         WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
+                    DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
+                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@ImageLocation", userProfile.ImageLocation);
+                    DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
+                    DbUtils.AddParameter(cmd, "@Id", userProfile.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

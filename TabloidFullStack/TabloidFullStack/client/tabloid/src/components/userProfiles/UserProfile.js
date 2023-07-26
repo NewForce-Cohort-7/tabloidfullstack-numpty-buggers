@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Card, CardBody } from "reactstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { Card, CardBody, Button } from "reactstrap";
 import { getAllUserProfiles } from "../../Managers/UserProfileManager";
 
 export const UserProfile = ({ userProfileProp }) => {
     const [userProfiles, setUserProfiles] = useState([]);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         getAllUserProfiles()
             .then(userProfiles => setUserProfiles(userProfiles));
     }, []);
+
 
     return (
         <Card className="m-4 text-center">
@@ -23,6 +26,16 @@ export const UserProfile = ({ userProfileProp }) => {
                     </div>
                     <div>
                         <strong>User Type:</strong> {userProfileProp.userType.name}
+                    </div>
+                    <div>
+                        
+                        <Button 
+                            color="primary" 
+                            size="sm"
+                            onClick={() => navigate(`/userprofiles/edit/${userProfileProp.id}`)}
+                        >Edit</Button>
+                        
+                        
                     </div>
                 </div>
             </CardBody>
