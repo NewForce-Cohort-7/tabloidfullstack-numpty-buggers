@@ -19,6 +19,7 @@ import { DeleteCategory } from "./Categories/DeleteCategory";
 import { PostEdit } from "./Posts/PostEdit";
 import { UserProfileList } from "./userProfiles/UserProfileList";
 import { UserProfileDetails } from "./userProfiles/UserProfileDetails";
+import { EditUserProfile } from "./userProfiles/EditUserProfile";
 
 export default function ApplicationViews() {
 
@@ -43,6 +44,7 @@ export default function ApplicationViews() {
         <Route path="/addtag/:id" element={<PostTags />} />
         <Route path="/users" element={<UserProfileList />} />
         <Route path="/userprofiles/:userProfileId" element={<UserProfileDetails />} />
+        <Route path="/userprofiles/edit/:userProfileId" element={<EditUserProfile />} />
 
       </Routes>
    );
