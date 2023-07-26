@@ -39,7 +39,7 @@ export default function ApplicationViews() {
         <Route path ="/tags" element ={<TagList />}/>
         <Route path="/tags/newtag" element={<AddTag/>} />
         <Route path = "/commentsbyId/:postId" element={<CommentList/>} />
-        <Route path = "/addComment" element = {<CommentForm/>} />
+        <Route path = "/addComment/:postId" element = {<CommentForm/>} />
         <Route path="/tags/edit/:tagId" element={<EditTag/>} />
         <Route path="/tags/delete/:tagId" element={<DeleteTag/>} />
         <Route path="/addtag/:id" element={<PostTags />} />

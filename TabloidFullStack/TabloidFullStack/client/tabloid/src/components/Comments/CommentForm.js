@@ -1,26 +1,30 @@
-import { useState } from "react"
-import { useNavigate } from "react-router"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router"
 import { addComment } from "../../Managers/CommentManager.js"
 import { Form, FormGroup, Card, CardBody, Label, Input, Button } from "reactstrap";
+import { getAllPosts } from "../../Managers/PostManager.js";
 
 
-export const CommentForm = ({postId}) => {
+export const CommentForm = () => {
     const navigate = useNavigate()
+    const {postId} = useParams();
     const localTabloidUser = localStorage.getItem("userProfile")
     const tabloidUserObject = JSON.parse(localTabloidUser)
+    const [posts, setPosts] = useState([])
     const currentDate = new Date();
     const offset = currentDate.getTimezoneOffset();
     const timezoneOffset = offset * 60 * 1000;
     const correctedDate = new Date(currentDate.getTime() - timezoneOffset)
 
+   
     const [comment, update] = useState({
-        PostId: postId, 
-        UserProfileId: tabloidUserObject.id,
-        Subject: "",
-        Content: "",
-        CreateDateTime: correctedDate.toISOString()
+        postId: postId, 
+        userProfileId: tabloidUserObject.id,
+        subject: "",
+        content: "",
+        createDateTime: correctedDate.toISOString()
     })
-
+  
     const handleSaveButtonClick = (event) =>  {
         event.preventDefault()
 
@@ -31,13 +35,10 @@ export const CommentForm = ({postId}) => {
             Content: comment.content,
             CreateDateTime: correctedDate.toISOString()
         }
-        console.log(postId)
-        addComment(commentToAPI)
-        .then(() => {
-            if (postId) {
-                navigate(`/comments/${postId}`);
-            }
-        });    }
+         addComment(commentToAPI)
+            .then(navigate("/posts"));
+          
+    }
     return (
         <div className="comment-form">
             <div className="row justify-content-center">
@@ -49,7 +50,7 @@ export const CommentForm = ({postId}) => {
                                 <Input
                                     required autoFocus
                                     type="text"
-                                    className="comment-input"
+                                    className="form-control"
                                     placeholder="Enter the sbject of your comment here"
                                     value={comment.subject}
                                     onChange={
@@ -59,6 +60,7 @@ export const CommentForm = ({postId}) => {
                                             update(copy)
                                         }
                                     }
+                                    
                                 />
                             </FormGroup>
                             <FormGroup>

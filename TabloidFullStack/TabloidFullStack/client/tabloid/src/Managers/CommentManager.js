@@ -6,18 +6,12 @@ export const GetPostcommentsbyId = (postId) => {
     .then((res) => res.json())
 };
 
-export const addComment = (CommentObject) => {
+export const addComment = (singlePost) => { 
     return fetch(baseUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(CommentObject),
-    })
-        .then((res) => {
-            if (!res.ok) {
-                throw new Error("Failed to create new Comment")
-            }
-            return res.json();
-        })
-    }
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(singlePost),
+    });
+  }; 
