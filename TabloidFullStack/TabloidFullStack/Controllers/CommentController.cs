@@ -29,7 +29,7 @@ namespace TabloidFullStack.Controllers
             return Ok(comment);
         }
         [HttpPost]
-        public IActionResult AddComment(Comment comment)
+        public ActionResult Post(Comment comment)
         {
             _commentRepository.AddComment(comment);
             return CreatedAtAction("Get", new { id = comment.Id }, comment);

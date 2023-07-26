@@ -8,13 +8,17 @@ export const CommentForm = ({postId}) => {
     const navigate = useNavigate()
     const localTabloidUser = localStorage.getItem("userProfile")
     const tabloidUserObject = JSON.parse(localTabloidUser)
+    const currentDate = new Date();
+    const offset = currentDate.getTimezoneOffset();
+    const timezoneOffset = offset * 60 * 1000;
+    const correctedDate = new Date(currentDate.getTime() - timezoneOffset)
 
     const [comment, update] = useState({
-        postId: 0, 
-        userProfileId: tabloidUserObject.id,
-        subject: "",
-        content: "",
-        createDateTime: Date.now()
+        PostId: postId, 
+        UserProfileId: tabloidUserObject.id,
+        Subject: "",
+        Content: "",
+        CreateDateTime: correctedDate.toISOString()
     })
 
     const handleSaveButtonClick = (event) =>  {
@@ -25,11 +29,15 @@ export const CommentForm = ({postId}) => {
             UserProfileId: tabloidUserObject.id,
             Subject: comment.subject,
             Content: comment.content,
-            CreateDateTime: new Date().toISOString
+            CreateDateTime: correctedDate.toISOString()
         }
-        return addComment(commentToAPI)
-            .then(navigate("/posts"));
-    }
+        console.log(postId)
+        addComment(commentToAPI)
+        .then(() => {
+            if (postId) {
+                navigate(`/comments/${postId}`);
+            }
+        });    }
     return (
         <div className="comment-form">
             <div className="row justify-content-center">
@@ -41,7 +49,7 @@ export const CommentForm = ({postId}) => {
                                 <Input
                                     required autoFocus
                                     type="text"
-                                    className="form-control"
+                                    className="comment-input"
                                     placeholder="Enter the sbject of your comment here"
                                     value={comment.subject}
                                     onChange={

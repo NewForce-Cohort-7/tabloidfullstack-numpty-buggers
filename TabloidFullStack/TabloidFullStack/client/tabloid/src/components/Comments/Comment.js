@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Table } from "reactstrap";
 
 export const Comment = ({comment}) => {
+
     return(
         <><p className="text-left px-2">Post Title: <strong>{comment.post?.title}</strong></p><Table striped bordered hover>
             <thead>
