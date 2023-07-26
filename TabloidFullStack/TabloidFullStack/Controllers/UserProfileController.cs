@@ -52,7 +52,8 @@ namespace TabloidFullStack.Controllers
     public IActionResult Post(UserProfile userProfile)
     {
         userProfile.CreateDateTime = DateTime.Now;
-        userProfile.UserTypeId = UserType.AUTHOR_ID;
+        //Line 56 was hard coded in to always make it so that a new user will always be registered as an author. My react code makes it possible to register as either.
+        //userProfile.UserTypeId = UserType.AUTHOR_ID;
         _userRepository.Add(userProfile);
         return CreatedAtAction(
             "GetByEmail",
