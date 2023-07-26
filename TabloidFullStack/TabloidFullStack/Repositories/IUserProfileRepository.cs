@@ -7,5 +7,6 @@ namespace TabloidFullStack.Repositories
     {
         List<UserProfile> GetAll();
         UserProfile GetUserProfileById(int id);
+        public void Update(UserProfile userProfile);
     }
 }
