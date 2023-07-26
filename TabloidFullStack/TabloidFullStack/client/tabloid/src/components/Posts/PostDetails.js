@@ -17,7 +17,7 @@ export const PostDetails = () => {
   useEffect(() => {
     getPostById(id).then(setPost)
     getAllPostTags(id).then(setTag);
-        
+       
 
 
   }, [])
