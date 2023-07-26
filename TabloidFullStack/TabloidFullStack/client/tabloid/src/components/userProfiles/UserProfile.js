@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Card, CardBody, Button } from "reactstrap";
 import { getAllUserProfiles } from "../../Managers/UserProfileManager";
 
-export const UserProfile = ({ userProfileProp }) => {
+export const UserProfile = ({ userProfileProp, isAdmin }) => {
     const [userProfiles, setUserProfiles] = useState([]);
 
     const navigate = useNavigate();
@@ -27,16 +27,17 @@ export const UserProfile = ({ userProfileProp }) => {
                     <div>
                         <strong>User Type:</strong> {userProfileProp.userType.name}
                     </div>
+                    
+                    {isAdmin && (
                     <div>
-                        
                         <Button 
                             color="primary" 
                             size="sm"
                             onClick={() => navigate(`/userprofiles/edit/${userProfileProp.id}`)}
                         >Edit</Button>
-                        
-                        
                     </div>
+                    )}                        
+                    
                 </div>
             </CardBody>
         </Card>

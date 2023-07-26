@@ -61,6 +61,24 @@ namespace TabloidFullStack.Controllers
             userProfile);
     }
 
+        [HttpGet("GetUserTypes")]
+        public IActionResult GetUserTypes()
+        {
+            return Ok(_userRepository.GetUserTypes());
+        }
+
+        [HttpPatch("UpdateUserType/{id}/{userTypeId}")]
+        public IActionResult UpdateUserType(int id, [FromBody] int userTypeId)
+        {
+            UserProfile userProfile = _userProfileRepository.GetUserProfileById(id);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+            _userRepository.UpdateUserType(id, userTypeId);
+            return NoContent();
+        }
+
     [HttpPut("{id}")]
     public IActionResult Put(int id, UserProfile userProfile)
         {

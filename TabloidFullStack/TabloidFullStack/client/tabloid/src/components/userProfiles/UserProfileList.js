@@ -16,6 +16,9 @@ export const UserProfileList = () => {
             });
     }, []);
 
+    const loggedInuser = JSON.parse(localStorage.getItem("userProfile"));
+    const isAdmin = loggedInuser?.userType?.id === 1;
+
     return (
         <Container>
             <Row>
@@ -26,7 +29,11 @@ export const UserProfileList = () => {
             <Row>
                 {userProfiles.map((userProfile) => (
                     <Col md="4" key={userProfile.id}>
-                        <UserProfile userProfileProp={userProfile} />
+                        <UserProfile 
+                            key={userProfile.id}
+                            userProfileProp={userProfile}
+                            isAdmin={isAdmin}
+                             />
                     </Col>
                 ))}
             </Row>
