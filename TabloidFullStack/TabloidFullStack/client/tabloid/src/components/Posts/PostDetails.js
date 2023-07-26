@@ -64,6 +64,14 @@ export const PostDetails = () => {
       </>
     }
   }
+  const editPostButtonForUser = () => {
+    if (post.userProfileId === tabloidUserObject.id) {
+      return <>
+      <Button color="warning" onClick={() => navigate(`/posts/edit/${post.id}`)}>Edit</Button>
+      </>
+  }
+
+  }
 
   return (
     <Card>
@@ -85,7 +93,7 @@ export const PostDetails = () => {
           }} 
           >Manage Tags</Button>
             {deleteButtonForUser()}
-            <Button color="warning" onClick={() => navigate(`/posts/edit/${post.id}`)}>Edit</Button>
+            {editPostButtonForUser()}
 
         </CardBody>
     </Card>
