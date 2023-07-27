@@ -77,13 +77,13 @@ namespace TabloidFullStack.Repositories
                     cmd.CommandText = @"
                         INSERT INTO Comment (PostId, UserProfileId, Subject, Content, CreateDateTime)
                         OUTPUT INSERTED.ID
-                        VALUES (@postId, @userProfileId, @subject, @content, @createDateTime)";
+                        VALUES (@PostId, @UserProfileId, @Subject, @Content, @CreateDateTime)";
 
-                    cmd.Parameters.AddWithValue("@postId", comment.PostId);
-                    cmd.Parameters.AddWithValue("@userProfileId", comment.UserProfileId);
-                    cmd.Parameters.AddWithValue("@subject", comment.Subject);
-                    cmd.Parameters.AddWithValue("@content", comment.Content);
-                    cmd.Parameters.AddWithValue("@createDateTime", comment.CreateDateTime);
+                    cmd.Parameters.AddWithValue("@PostId", comment.PostId);
+                    cmd.Parameters.AddWithValue("@UserProfileId", comment.UserProfileId);
+                    cmd.Parameters.AddWithValue("@Subject", comment.Subject);
+                    cmd.Parameters.AddWithValue("@Content", comment.Content);
+                    cmd.Parameters.AddWithValue("@CreateDateTime", comment.CreateDateTime);
 
                     comment.Id = (int)cmd.ExecuteScalar();
                 }

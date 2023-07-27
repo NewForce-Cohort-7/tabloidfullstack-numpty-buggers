@@ -86,6 +86,7 @@ export const PostDetails = () => {
               </div>
             </CardText>
             <Button onClick={() => navigate(`/commentsbyId/${post.id}`)}>View Comments</Button>
+            <Button onClick={() => navigate(`/addComment/${post.id}`)}>Add Comment</Button>
          
             < Button onClick={(addtag) => {
             navigate(`/addTag/${id}`)
