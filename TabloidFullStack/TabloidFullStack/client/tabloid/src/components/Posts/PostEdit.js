@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react"
 import {useNavigate, useParams} from "react-router-dom"
-import {addPost, editPost, getAllPosts, getPostById} from "../../Managers/PostManager"
+import {editPost, getPostById} from "../../Managers/PostManager"
 import {getAllCategories} from "../../Managers/CategoryManager"
 
+//SEE POSTFORM FOR SIMILAR CODE AND EXPLANATION
+//Notice that useParams is crucial for our edit. This is how we get the data for the specific post we are on as well as PUT to the database, overriding the old information with our newly updated inputs
 export const PostEdit = () => {
     const navigate = useNavigate()
     const localTabloidUser = localStorage.getItem("userProfile");
@@ -36,8 +38,8 @@ export const PostEdit = () => {
         })
     }, [postId]);
 
-    const handleSaveButtonClick = (e) => {
-        e.preventDefault()
+    const handleSaveButtonClick = (event) => {
+        event.preventDefault()
 
         const postToEdit = {
             Id: parseInt(postId),
