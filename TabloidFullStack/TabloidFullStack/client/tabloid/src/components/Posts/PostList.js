@@ -17,6 +17,7 @@ export const PostList = () => {
         getPosts();
     }, [])
 
+    //It can be done this way or you can just put it in the button
     const create = () => {
       navigate("/posts/add")
     }
@@ -39,7 +40,6 @@ export const PostList = () => {
               </tr>
             </thead>
               {posts.map((post) => {
-                // console.log(post)
                 return  <Post key={post.id} post={post} />
               })}
             </Table>
