@@ -16,6 +16,7 @@ export const UserProfileList = () => {
             });
     }, []);
 
+        // Checks to see if the user that's currently logged in is an admin or author
     const loggedInuser = JSON.parse(localStorage.getItem("userProfile"));
     const isAdmin = loggedInuser?.userType?.id === 1;
 

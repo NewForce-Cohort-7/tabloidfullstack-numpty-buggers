@@ -1,3 +1,5 @@
+// This component is responsible for allowing users to add categories to the database from the front end
+
 import React, {useState, useContext } from "react";
 import { Form, FormGroup, Card, CardBody, Label, Input, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +12,7 @@ export const CategoryForm = () => {
 
     const navigate = useNavigate();
 
+    //Saves the new category to the database once the button is clicked
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
         const categoryToAPI = {
@@ -53,4 +56,4 @@ export const CategoryForm = () => {
     );
 };
 
-export default CategoryForm;
+export default CategoryForm; //To be exported to ApplicationViews

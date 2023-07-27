@@ -36,11 +36,13 @@ export const register = (userObject, password) => {
     });
 };
 
+//Return a list of all the users
 export const getAllUserProfiles = () => {
   return fetch(`${apiUrl}/api/userprofile`)
   .then((r) => r.json())
 };
 
+//Return an individual user
 export const getUserProfileById = (id) => {
   return fetch(`${apiUrl}/api/userprofile/${id}`).then((r) => r.json());
 };

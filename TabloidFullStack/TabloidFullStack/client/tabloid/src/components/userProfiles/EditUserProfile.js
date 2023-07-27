@@ -1,3 +1,5 @@
+//This component is in charge of letting admins change the the user type. May allow user's to edit their profiles in the future.
+
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUserProfileById, updateUserType, getAllUserTypes } from "../../Managers/UserProfileManager";

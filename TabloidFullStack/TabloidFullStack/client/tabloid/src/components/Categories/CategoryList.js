@@ -1,3 +1,5 @@
+//This component is responsible for returning the list of categories to be viewed on the front end
+
 import React, { useEffect, useState } from "react";
 import { getAllCategories } from "../../Managers/CategoryManager";
 import { Button } from "reactstrap";
@@ -16,6 +18,7 @@ const CategoryList = () => {
         getCategories();
     }, []);
 
+    //Clicking the button associated with this function will allow the user to move to the create page for Categories
     const create = (e) => {
       navigate("/category/add")
     }
@@ -52,4 +55,4 @@ const CategoryList = () => {
       );
     };
     
-    export default CategoryList;
+    export default CategoryList; //To be exported to ApplicationViews

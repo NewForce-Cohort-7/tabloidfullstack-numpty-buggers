@@ -1,3 +1,5 @@
+//This component is responsible for showing how the list of categories will appear in the front end
+
 import React from "react";
 import { Card, CardBody } from "reactstrap";
 

@@ -1,3 +1,5 @@
+// This component is responsible for making sure that the user is able to edit a category in the database from the front end
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { editCategory, getCategoryById } from "../../Managers/CategoryManager";
@@ -19,6 +21,7 @@ export const EditCategory = () => {
         })
     }, []);
 
+    // This function is responsible for making sure the change made to the category is saved
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
         editCategory(category)
