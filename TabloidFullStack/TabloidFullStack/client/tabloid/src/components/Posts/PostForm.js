@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react"
 import {useNavigate} from "react-router-dom"
-import {addPost, getAllPosts} from "../../Managers/PostManager"
+import {addPost} from "../../Managers/PostManager"
 import {getAllCategories} from "../../Managers/CategoryManager"
 
 export const PostForm = () => {
@@ -9,6 +9,7 @@ export const PostForm = () => {
     const tabloidUserObject = JSON.parse(localTabloidUser)
     const [categories, setCategories] = useState([])
 
+    //Since categories isn't a property of post we have to fetch them so we can select one
     const getCategories = () => {
         getAllCategories().then(allCategories => setCategories(allCategories));
     }
@@ -35,6 +36,7 @@ export const PostForm = () => {
             Title: post.title,
             Content: post.content,
             ImageLocation: post.imageLocation,
+            //toISOString is essential in order to get the correct syntax inserted into the database
             CreateDateTime: new Date().toISOString(),
             PublishDateTime: new Date().toISOString(),
             IsApproved: true,
@@ -42,10 +44,10 @@ export const PostForm = () => {
             UserProfileId: tabloidUserObject.id
         }
 
-        // I couldn't get it to navigate me to the post I just created
         return addPost(postToSendToAPI).then(navigate(`/posts`))
     }
 
+    //I've found this method to be very useful when needing to select an item then add it to the database
     const selectList = (event) => {
         const copy = {
             ...post
@@ -62,6 +64,7 @@ export const PostForm = () => {
                 <fieldset>
                     <div className="form-group">
                         <label htmlFor="category-select">Category</label>
+                        {/* Select that category from the list!! */}
                         <select id="type"
                             value={
                                 post.categoryId
