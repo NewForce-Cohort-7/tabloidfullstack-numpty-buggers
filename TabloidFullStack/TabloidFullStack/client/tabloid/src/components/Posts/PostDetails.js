@@ -37,10 +37,12 @@ export const PostDetails = () => {
     });
   };
 
+  //State is used to show the alert or not. We change state when the button is clicked to false to get rid of the alert
   const handleCancel = () => {
     setShowAlert(false) 
   }
 
+  //I had to put the alert into a function in order to use bootstraps Alert
   const deletePostAlert = () => {
     return (<>
     <Alert color="danger" key={'danger'}>
@@ -50,6 +52,7 @@ export const PostDetails = () => {
     </>)
   }
 
+  //Delete button only shows for the user
   const deleteButtonForUser = () => {
     if (post.userProfileId === tabloidUserObject.id) {
       return <><Button
@@ -64,14 +67,14 @@ export const PostDetails = () => {
       </>
     }
   }
+
+  //Edit button only shows for the user
   const editPostButtonForUser = () => {
     if (post.userProfileId === tabloidUserObject.id) {
       return <>
       <Button color="warning" onClick={() => navigate(`/posts/edit/${post.id}`)}>Edit</Button>
       </>
-  }
-
-  }
+  }}
 
   return (
     <Card>
