@@ -24,6 +24,7 @@ export default function Register({setIsLoggedIn}) {
       return;
     }
 
+    //password was not active in this application
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
 
@@ -37,7 +38,7 @@ export default function Register({setIsLoggedIn}) {
     }
  };
 
- //This is makes it so a new user can register as an author or admin. People wouldn't normally be given this ability in a real app and would need permissions. We could always uncomment the hard code in the userprofilecontroller in c# to automatically register authors.
+ //This is makes it so a new user can register as an author or admin. People wouldn't normally be given this ability in a real app and would need permissions. We could always uncomment the hard code in the userprofilecontroller in c# to automatically register authors. I found that You still have to have this function though for it to have something to send that can be overwritten
   const adminOrAuthor = (e) => {
     e.preventDefault();
     const userTypeValue = parseInt(e.target.value);

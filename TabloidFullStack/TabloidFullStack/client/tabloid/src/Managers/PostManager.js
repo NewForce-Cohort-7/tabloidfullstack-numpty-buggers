@@ -15,6 +15,7 @@ export const getPostById = (id) => {
     return fetch(`/api/post/${id}`).then((res) => res.json())
 }
 
+//POST fetch to add a post to the database
 export const addPost = (singlePost) => {
     return fetch(baseUrl, {
         method: "POST",
@@ -25,6 +26,7 @@ export const addPost = (singlePost) => {
     });
 }
 
+//DELETE fetch with an id parameter to delete the post by its Id. In SQL I did a cascade delete to also delete each comment associated with that post. The SQL query is commented out under the delete method in PostRepository.cs
 export const deletePost = (id) => {
     return fetch(`/api/post/${id}`, {
       method: "DELETE",
@@ -32,6 +34,7 @@ export const deletePost = (id) => {
       .then(() => getAllPosts())
   };
 
+//PUT fetch to edit the individual post. Selecting it by it's id
   export const editPost = (post) => {
     console.log(post)
     return fetch(`/api/post/${post.Id}`, {

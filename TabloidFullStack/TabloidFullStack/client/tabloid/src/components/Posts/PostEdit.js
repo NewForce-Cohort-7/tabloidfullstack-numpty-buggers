@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react"
 import {useNavigate, useParams} from "react-router-dom"
-import {addPost, editPost, getAllPosts, getPostById} from "../../Managers/PostManager"
+import {editPost, getPostById} from "../../Managers/PostManager"
 import {getAllCategories} from "../../Managers/CategoryManager"
 
+//SEE POSTFORM FOR SIMILAR CODE AND EXPLANATION
+//Notice that useParams is crucial for our edit. This is how we get the data for the specific post we are on as well as PUT to the database, overriding the old information with our newly updated inputs
 export const PostEdit = () => {
     const navigate = useNavigate()
     const localTabloidUser = localStorage.getItem("userProfile");
@@ -17,7 +19,7 @@ export const PostEdit = () => {
     useEffect(() => {
         getCategories()
     }, [])
-    
+ 
     const [post, update] = useState({
         title: "",
         content: "",
@@ -36,8 +38,8 @@ export const PostEdit = () => {
         })
     }, [postId]);
 
-    const handleSaveButtonClick = (e) => {
-        e.preventDefault()
+    const handleSaveButtonClick = (event) => {
+        event.preventDefault()
 
         const postToEdit = {
             Id: parseInt(postId),
@@ -51,10 +53,15 @@ export const PostEdit = () => {
             CategoryId: post.categoryId,
             UserProfileId: post.userProfileId
         }
-        return editPost(postToEdit)
+        //I have a simple window alert and conditional if the category field is left blank. The user MUST have something in this field in order to execute their edit.
+        if (postToEdit.CategoryId < 1) {
+        return window.alert("Please remember to select a category")}
+        else{
+            return editPost(postToEdit)
             .then(() => {
                 navigate(`/posts`)
             })
+        } 
     }
 
     const selectList = (event) => {
@@ -74,6 +81,7 @@ export const PostEdit = () => {
                     <div className="form-group">
                         <label htmlFor="category-select">Category</label>
                         <select id="type"
+                            required
                             value={
                                 post.categoryId
                             }

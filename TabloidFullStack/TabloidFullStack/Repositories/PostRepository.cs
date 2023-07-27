@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using TabloidFullStack.Models;
 using TabloidFullStack.Utils;
 using Microsoft.Extensions.Hosting;
+using System.Diagnostics.Metrics;
 
 namespace TabloidFullStack.Repositories
 {
@@ -229,6 +230,17 @@ namespace TabloidFullStack.Repositories
                 }
             }
         }
+
+        //This is how I made a cascade delete to delete every comment associated with the post I was deleting
+
+        //ALTER TABLE[Comment]
+        //DROP CONSTRAINT IF EXISTS[FK_Comment_Post];
+
+        //ALTER TABLE[Comment]
+        //ADD CONSTRAINT[FK_Comment_Post]
+        //FOREIGN KEY([PostId]) REFERENCES[Post] ([Id]) ON DELETE CASCADE;
+
+        //SELECT* FROM Comment
         public void Update(Post post)
         {
             using (var conn = Connection)
