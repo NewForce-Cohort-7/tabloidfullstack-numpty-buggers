@@ -8,6 +8,7 @@ export const PostList = () => {
     const navigate = useNavigate()
     const [posts, setPosts] = useState([]);
 
+    //getting all the posts so they can be displayed
     const getPosts = () => {
         getAllPosts().then(allPosts => setPosts(allPosts));
     }
