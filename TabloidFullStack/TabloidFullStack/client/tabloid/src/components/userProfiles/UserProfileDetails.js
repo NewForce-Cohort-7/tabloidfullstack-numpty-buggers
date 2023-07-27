@@ -8,6 +8,7 @@ export const UserProfileDetails = () => {
     const [userProfile, setUserProfile] = useState({});
     const navigate = useNavigate();
 
+    // Returns the user with the ID requested. Console logged to make sure the useEffect was working properly.
     useEffect(() => {
         getUserProfileById(userProfileId)
             .then(userProfileFromAPI => {
@@ -16,6 +17,8 @@ export const UserProfileDetails = () => {
             });
     }, []);
 
+
+    //GIF returns where the profile picture would be, in case the user is not found or the app is returning the ID as 'undefined'
     return (
         <Container>
             <Button onClick={() => navigate(-1)}>Back</Button>

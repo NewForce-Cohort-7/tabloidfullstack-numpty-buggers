@@ -17,7 +17,8 @@ export const DeleteCategory = () => {
                 update(categoryArray)
             })
     }, [categoryId])
-
+    
+    // Handles deleting the category and sends the user back to the main category page after the item as been deleted //
     const handleDelete = (event) => {
         event.preventDefault()
         deleteCategory(category.id)
@@ -25,7 +26,7 @@ export const DeleteCategory = () => {
                 navigate("/category")
             })
     }
-
+    // Sends user back to the main category page without deleting the category they selected
     const handleNo = () => {
         navigate("/category")
     }
