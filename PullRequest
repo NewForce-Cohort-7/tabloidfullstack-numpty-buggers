@@ -1,0 +1,34 @@
+Description
+This pull request is for TabloidFullStack Trello ticket number: , [ LINK ], TITLE. DISCRIPTION OF TICKET
+The branch for the pull request: 
+
+Updates
+DISCRIPTION OF WHAT CHANGED
+
+Type of change
+
+
+Testing Instructions
+Follow these instructions to protect the branch you are working on and to test this pull request: https://gist.github.com/jordan-castelloe/96f76d5bd4cfbd2181084af674c2a1af#when-you-need-to-test-a-teammates-pr
+
+Seed The Data
+If you do not currently have the code for this project, clone the repository - LINK TO REPOSITORY
+
+Open the TabloidFullStack.sln in visual studio and prepare your database.
+In the github repository: LINK TO THE REPO
+Open the SQL folder: lINK TO SQL FOLDER
+there are two files - LINK TO FILES
+In Visual Studio in the top navbar click View and select SQL Server Object Explorer. Open the server marked as "SQLEXPRESS" in the SQL Server Object Explorer on the left side of Visual Code. Once there, add a new SQL server by selecting the 'Add SQL Server' option at the top of the side bar. Copy the data from the seed data and execute by pressing the green Play button.
+start the server by clicking the solid green play button in the middle top of your screen. A browser window will display with the Tabloid landing page.
+
+
+Test the NAME OF FEATURE
+
+NUMBERED STEP BY STEP DIRECTIONS
+
+SQL Query test
+If you would like to further test this or test it through a SQL query, create a query for the database you created at the start of the pull request testing. In your new query, paste:
+
+QL QUERY TO TEST. 
+
+Run the test (green play button to the left of the query) WHAT RESULTS THE TESTER WILL SEE

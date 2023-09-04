@@ -2,7 +2,6 @@
 
 
 
-
 const apiUrl = "https://localhost:5001";
 
 export const login = (userObject) => {
@@ -37,8 +36,44 @@ export const register = (userObject, password) => {
     });
 };
 
+//Return a list of all the users
+export const getAllUserProfiles = () => {
+  return fetch(`${apiUrl}/api/userprofile`)
+  .then((r) => r.json())
+};
 
+//Return an individual user
+export const getUserProfileById = (id) => {
+  return fetch(`${apiUrl}/api/userprofile/${id}`).then((r) => r.json());
+};
 
+// export const editUserProfile = (userProfile) => {
+//   return fetch(`/api/userprofile/${userProfile.id}`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(userProfile)
+//   })
+//   .then(() => getAllUserProfiles());
+// }
+
+//Retrieve user types
+export const getAllUserTypes = () => {
+  return fetch(`${apiUrl}/api/userprofile/GetUserTypes`)
+  .then((r) => r.json())
+}
+
+//Change the user type
+export const updateUserType = (userProfileId, userTypeId) => {
+  return fetch(`${apiUrl}/api/userprofile/UpdateUserType/${userProfileId}/${userTypeId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userTypeId)
+  })
+}
 
 
 // return (
